@@ -1,0 +1,31 @@
+<div class="clinic-info-page min-h-screen bg-cream">
+  <app-clinic-header [clinicName]="clinicData.clinicName" [logo]="clinicData.logo || ''"
+    [coverImage]="clinicData.coverImage || ''">
+  </app-clinic-header>
+
+  <div class="container mx-auto px-6 py-12">
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-10">
+      <div class="space-y-6">
+        <!-- Contact Info -->
+        <app-contact-info [clinicName]="clinicData.clinicName" [email]="clinicData.email" [phone]="clinicData.phone">
+        </app-contact-info>
+
+        <!-- Working Hours -->
+        <app-working-hours [open]="clinicData.workingHours.open" [close]="clinicData.workingHours.close">
+        </app-working-hours>
+
+        <!-- Social Links -->
+        <app-social-links [facebook]="clinicData.social.facebook || ''" [instagram]="clinicData.social.instagram || ''"
+          [tiktok]="clinicData.social.tiktok || ''" [whatsapp]="clinicData.social.whatsapp || ''">
+        </app-social-links>
+      </div>
+
+      <div class="space-y-8">
+        <app-location-map [address]="clinicData.location.address"
+          [googleMapLink]="clinicData.location.googleMapLink || ''" [coordinates]="clinicData.location.coordinates">
+        </app-location-map>
+      </div>
+    </div>
+
+  </div>
+</div>

@@ -1,0 +1,18 @@
+<section class="flex items-center gap-14 layout-container-lg py-10">
+  <div class="space-y-8 max-w-2xl">
+    <h2 class="text-4xl font-semibold tracking-wider text-dark">
+      {{ title }}
+    </h2>
+
+    <p
+      *ngFor="let paragraph of paragraphs"
+      class="text-dark font-medium tracking-wide"
+    >
+      {{ paragraph }}
+    </p>
+  </div>
+
+  <div>
+    <img [src]="image" [alt]="title" />
+  </div>
+</section>

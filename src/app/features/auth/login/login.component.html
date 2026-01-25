@@ -1,0 +1,42 @@
+<app-modal #modal (closeModal)="onCloseModal()">
+    <form #form="ngForm" (ngSubmit)="onSubmit(form)" class="p-6 rounded-md w-full max-w-md space-y-4">
+        <h2 class="text-2xl font-bold text-center">Login</h2>
+
+        <!-- Email -->
+        <app-control label="Email">
+            <input type="email" name="email" id="email" required placeholder="you@example.com" ngModel email
+                #email="ngModel"/>
+            @if (email.invalid && (email.touched || email.dirty)) {
+            <small class="text-red-500 text-sm">
+                @if (email.errors?.['required']) {
+                Email is required
+                }
+                @if (email.errors?.['email']) {
+                Please enter a valid email
+                }
+            </small>
+            }
+        </app-control>
+
+        <!-- Password -->
+        <app-control label="Password">
+            <input type="password" name="password" minlength="8" required placeholder="********" ngModel password
+                #password="ngModel" />
+            @if (password.invalid && (password.touched || password.dirty)) {
+            <small class="text-red-500 text-sm">
+                @if (password.errors?.['required']) {
+                Password is required
+                }
+                @if (password.errors?.['minlength']) {
+                Password must be at least 8 characters
+                }
+            </small>
+            }
+        </app-control>
+
+        <button type="submit" appButton variant="primary">
+            Login
+        </button>
+
+    </form>
+</app-modal>

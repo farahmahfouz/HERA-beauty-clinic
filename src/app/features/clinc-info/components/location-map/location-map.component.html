@@ -1,0 +1,41 @@
+<div class="location-map bg-white rounded-4xl shadow-xs overflow-hidden">
+  <div class="p-6">
+    <h3 class="text-2xl font-bold text-gray-800 mb-4">Location</h3>
+    
+    @if (address) {
+      <div class="flex items-start gap-3 mb-4">
+        <svg class="w-6 h-6 text-blue-600 mt-1 " fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+        </svg>
+        <div>
+          <p class="text-sm text-gray-500 mb-1">Address</p>
+          <p class="text-lg font-semibold text-gray-800">{{ address }}</p>
+        </div>
+      </div>
+    }
+
+    @if (mapEmbedUrl) {
+      <div class="map-container rounded-2xl overflow-hidden mb-4">
+        <iframe 
+          [src]="mapEmbedUrl"
+          width="100%" 
+          height="400" 
+          style="border:0;" 
+          allowfullscreen="" 
+          loading="lazy" 
+          referrerpolicy="no-referrer-when-downgrade">
+        </iframe>
+      </div>
+    }
+
+    <button 
+      (click)="openInGoogleMaps()" 
+      class="w-full bg-orange-500 text-white py-3 px-6 rounded-2xl hover:bg-orange-600 transition flex items-center justify-center gap-2">
+      <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+      </svg>
+      Open in Google Maps
+    </button>
+  </div>
+</div>

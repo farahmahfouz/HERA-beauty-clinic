@@ -1,0 +1,46 @@
+.section-featured {
+  padding: 6.4rem 0;
+  overflow: hidden;
+  background-color: #fff;
+}
+
+.logos-track {
+  display: flex;
+  width: max-content;
+  animation: scroll 25s linear infinite;
+}
+
+.logos {
+  display: flex;
+  align-items: center;
+  gap: 4.8rem;
+  padding-right: 4.8rem;
+}
+
+.logos img {
+  height: 3.2rem;
+  /* filter: brightness(0); */
+  opacity: 0.5;
+}
+
+.logo.red {
+  filter: invert(29%) sepia(93%) saturate(3290%) hue-rotate(345deg);
+}
+
+.logo.blue {
+  filter: invert(35%) sepia(92%) saturate(1700%) hue-rotate(200deg);
+}
+
+.logo.green {
+  filter: invert(40%) sepia(70%) saturate(1200%) hue-rotate(90deg);
+}
+
+
+@keyframes scroll {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}

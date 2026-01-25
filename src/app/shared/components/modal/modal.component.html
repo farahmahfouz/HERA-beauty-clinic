@@ -1,0 +1,10 @@
+<dialog #dialog>
+  <button
+    class="absolute top-4 right-6 text-xl focus:outline-none focus:ring-0 cursor-pointer"
+    type="button"
+    (click)="close()">
+    ✕
+  </button>
+
+  <ng-content></ng-content>
+</dialog>

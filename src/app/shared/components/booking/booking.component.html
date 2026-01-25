@@ -1,0 +1,77 @@
+<app-modal>
+    <div class=" max-w-2xl text-dark">
+
+        <h3 class="font-bold text-xl mb-6">
+            Book Appointment
+        </h3>
+
+        <!-- Doctor Select -->
+        <div class="form-control mb-4">
+            <label class="label">
+                <span class="label-text">Select Doctor</span>
+            </label>
+            <select class="select select-bordered" >
+                <option disabled selected>Choose doctor</option>
+                <option >
+                    <!-- {{ doctor.name }} -->
+                      Dr Dina
+                </option>
+            </select>
+        </div>
+
+        <!-- Date Picker -->
+        <div class="form-control mb-4">
+            <label class="label">
+                <span class="label-text">Select Date</span>
+            </label>
+            <input type="date" class="input input-bordered"  />
+        </div>
+
+        <!-- Available Time Slots -->
+        <div class="mb-6" >
+            <p class="font-medium mb-2">Available Time</p>
+
+            <div class="grid grid-cols-3 gap-2">
+                <label  class="btn btn-outline">
+                    <input type="radio" name="timeSlot" class="hidden"  />
+                    <!-- {{ slot.start }} - {{ slot.end }} --> 9: 7
+                </label>
+            </div>
+        </div>
+
+        <!-- Services -->
+        <div class="mb-6">
+            <p class="font-medium mb-2">Services</p>
+
+            <div class="space-y-2">
+                <label class="flex items-center gap-3">
+                    <input type="checkbox" class="checkbox checkbox-primary"  />
+                    <span>
+                        <!-- {{ option.optionName }} --> laser
+                        <span class="text-sm text-gray-400">
+                            <!-- ({{ option.price }} EGP) --> 500
+                        </span>
+                    </span>
+                </label>
+            </div>
+        </div>
+
+        <!-- Total -->
+        <div class="flex justify-between items-center mb-6">
+            <span class="font-semibold">Total</span>
+            <span class="text-lg font-bold">
+                500 EGP
+            </span>
+        </div>
+
+        <!-- Actions -->
+        <div class="modal-action">
+            <button appButton variant="tertiary" >
+                Cancel
+            </button>
+            <button appButton variant="secondary" >
+                Confirm Booking
+            </button>
+        </div>
+    </div>
+</app-modal>

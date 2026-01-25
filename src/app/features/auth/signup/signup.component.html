@@ -1,0 +1,86 @@
+<app-modal #modal (closeModal)="onCloseModal()">
+    <form class="px-6 rounded-md w-full max-w-md space-y-2" [formGroup]="form" (ngSubmit)="onSubmit()">
+        <h2 class="text-2xl font-bold text-center">Create Account</h2>
+
+        <!-- Name -->
+        <app-control label="Name">
+            <input type="text" name="name" required placeholder="Your name" formControlName="name" />
+            @if (name) {
+            <small class="text-red-500 text-sm pb-2">
+                Name is required
+            </small>
+            }
+        </app-control>
+
+        <app-control label="Username">
+            <input type="text" name="username" required minlength="4" placeholder="yourusername"
+                formControlName="username" />
+            @if (username) {
+            <small class="text-red-500 text-sm">
+                @if (form.controls.username.errors?.['required']) {
+                Username is required
+                }
+                @if (form.controls.username.errors?.['minlength']) {
+                Username must be at least 4 characters
+                }
+            </small>
+            }
+        </app-control>
+
+        <!-- Email -->
+        <app-control label="Email">
+            <input type="email" name="email" required placeholder="you@example.com" formControlName="email" />
+            @if (email) {
+            <small class="text-red-500 text-sm">
+                @if (form.controls.email.errors?.['required']) {
+                Email is required
+                }
+                @if (form.controls.email.errors?.['email']) {
+                Please enter a valid email
+                }
+            </small>
+            }
+        </app-control>
+
+        <!-- Password -->
+        <app-control label="Password">
+            <input type="password" name="password" minlength="8" required placeholder="********"
+                formControlName="password" />
+            @if (password) {
+            <small class="text-red-500 text-sm">
+                @if (form.controls.password.errors?.['required']) {
+                Password is required
+                }
+                @if (form.controls.password.errors?.['minlength']) {
+                Password must be at least 8 characters
+                }
+            </small>
+            }
+        </app-control>
+
+        <!-- Phone -->
+        <app-control label="Phone">
+            <input type="text" name="phone" required pattern="^\+20\d{10}$" placeholder="+201234567890"
+                formControlName="phone" />
+            <p class="text-xs text-gray-500 mt-1">
+                Must start with +20 and contain 10 digits
+            </p>
+            @if (phone) {
+            <small class="text-red-500 text-sm">
+                @if (form.controls.phone.errors?.['required']) {
+                Phone number is required
+                }
+                @if (form.controls.phone.errors?.['pattern']) {
+                Phone must start with +20 and contain 10 digits
+                }
+            </small>
+            }
+        </app-control>
+
+        <!-- Submit -->
+        <button type="submit" appButton variant="primary">
+            Sign Up
+        </button>
+
+    </form>
+</app-modal>

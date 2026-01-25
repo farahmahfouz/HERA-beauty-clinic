@@ -1,0 +1,13 @@
+.control input,
+.control textarea {
+  width: 100%;
+  padding: 0.5rem 1rem;
+  border-radius: 0.5rem;
+  border: 1px solid #ccc;
+  outline: none;
+}
+
+.control input:focus,
+.control textarea:focus {
+  border-color: black;
+}

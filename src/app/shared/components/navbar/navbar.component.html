@@ -1,0 +1,60 @@
+<nav class="fixed top-0 left-0 right-0 z-10 navbar bg-cream" [class.scrolled]="isScrolled">
+    <div class="flex items-center h-16 px-24 container mx-auto">
+        <!-- Logo -->
+        <img src="/images/logo.png" alt="logo" class="w-16 h-16 object-contain " />
+
+        <!-- Desktop Links -->
+        <ul class="hidden md:flex flex-1 justify-center gap-6">
+            @for (link of navLinks; track link.label) {
+
+            <li>
+                @if (link.type === 'link') {
+                <a [routerLink]="link.route" routerLinkActive="font-bold" [routerLinkActiveOptions]="{ exact: true }"
+                    class="text-dark hover:text-gray-800">
+                    {{ link.label }}
+                </a>
+                }
+
+                <!-- Services -->
+                @if (link.type === 'services') {
+                <a class="text-dark relative hover:text-gray-800 cursor-pointer active:font-bold" (click)="toggleServices($event)">
+                    {{ link.label }}
+                </a>
+                }
+            </li>
+
+            }
+        </ul>
+
+
+        <app-service-menu [isOpen]="isServicesOpen" (close)="isServicesOpen = false"></app-service-menu>
+
+        <!-- Desktop Auth -->
+        <div class="hidden md:flex gap-4">
+            <p class="text-dark cursor-pointer hover:text-gray-800" (click)="openLoginModal()">Login</p>
+            <p class="text-dark cursor-pointer hover:text-gray-800" (click)="openSignupModal()">Signup</p>
+        </div>
+
+        <!-- Mobile Menu Button -->
+        <button class="ml-auto md:hidden text-white" (click)="toggleMenu()">
+            ☰
+        </button>
+    </div>
+
+    <!-- Mobile Menu -->
+    @if(isMenuOpen){
+    <div class="md:hidden px-6 pb-4 bg-black/50 backdrop-blur-sm">
+        <ul class="flex flex-col gap-3">
+            <li><a routerLink="/" class="text-white">Home</a></li>
+            <li><a routerLink="/about" class="text-white">About</a></li>
+            <li><a routerLink="/services" class="text-white">Services</a></li>
+            <li><a routerLink="/contact" class="text-white">Contact</a></li>
+        </ul>
+
+        <div class="flex gap-4 mt-4">
+            <p class="text-white cursor-pointer" (click)="openLoginModal()">Login</p>
+            <p class="text-white cursor-pointer" (click)="openSignupModal()">Signup</p>
+        </div>
+    </div>
+    }
+</nav>

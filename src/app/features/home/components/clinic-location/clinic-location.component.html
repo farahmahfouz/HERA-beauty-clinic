@@ -1,0 +1,24 @@
+<section class="clinic-location-section py-16 bg-gray-50">
+  <div class="container mx-auto px-6">
+    <div class="text-center mb-12">
+      <h2 class="text-4xl font-bold text-gray-800 mb-4">موقع العيادة</h2>
+      <p class="text-lg text-gray-600">نحن هنا لخدمتك في أي وقت</p>
+    </div>
+
+    <div class="max-w-4xl mx-auto">
+      <app-location-map
+        [address]="address"
+        [googleMapLink]="googleMapLink"
+        [coordinates]="coordinates">
+      </app-location-map>
+
+      <div class="text-center mt-8">
+        <a 
+          routerLink="/contact" 
+          class="inline-block bg-blue-600 text-white px-8 py-3 rounded-lg hover:bg-blue-700 transition">
+          عرض جميع معلومات الاتصال
+        </a>
+      </div>
+    </div>
+  </div>
+</section>

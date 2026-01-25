@@ -1,0 +1,22 @@
+<div class="backdrop" [class.show]="isOpen" (click)="close.emit()"></div>
+<div class="absolute left-1/2 top-full w-full -translate-x-1/2
+         bg-cream p-10 z-50" [class.animate-mega-in]="isOpen" [class.animate-mega-out]="!isOpen">
+    <div class="grid grid-cols-4 justify-items-center gap-20">
+        @for (service of services; track service.title) {
+        <div>
+            <h3 class="text-amber-600 font-semibold mb-4">
+                {{ service.title }}
+            </h3>
+
+            <ul class="space-y-5 text-gray-700">
+                @for (item of service.items; track item) {
+                <li class="cursor-pointer hover:text-purple-500 transition">
+                    {{ item }}
+                </li>
+                }
+            </ul>
+        </div>
+        }
+
+    </div>
+</div>

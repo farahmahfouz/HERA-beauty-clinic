@@ -1,0 +1,17 @@
+<section class="py-20 text-dark layout-container" id="faqs">
+    <p class="text-3xl font-semibold py-10 text-center">Got Questions? We got answers</p>
+    @for(faq of faqs; track $index) {
+        <details class="border-b border-gray-200 py-6 group ">
+            <summary
+            class="cursor-pointer list-none flex justify-between items-center text-2xl font-medium text-gray-900"
+            >
+            {{ faq.question }}
+            <span class="transition-transform group-open:rotate-180">▾</span>
+        </summary>
+        
+        <p class="mt-3 text-lg text-gray-600 leading-relaxed">
+            {{ faq.answer }}
+        </p>
+    </details>
+}
+</section>
