@@ -1,14 +1,17 @@
-<app-navbar (openSignup)="onOpenSignup()" (openLogin)="onOpenLogin()"/>
+<app-navbar (openSignup)="onOpenSignup()" (openLogin)="onOpenLogin()" />
 <main>
-  <router-outlet/>
+  <div class="min-h-[60vh]">
+    <router-outlet />
+  </div>
+
 
   @if(showSignup){
-    <app-signup (closeModal)="onCloseSignup()"/>
+  <app-signup (closeModal)="onCloseSignup()" />
   }
 
   @if(showLogin){
-    <app-login (closeModal)="onCloseLogin()"/>
+  <app-login (closeModal)="onCloseLogin()" />
   }
 
-  <app-footer/>
+  <app-footer />
 </main>

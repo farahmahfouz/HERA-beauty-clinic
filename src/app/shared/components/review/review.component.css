@@ -1,12 +1,16 @@
+.pattern {
+  position: relative;
+  overflow: hidden;
+}
+
 .pattern::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background-image: url('/images/logo.png');
-    background-size: 100px;
-    background-repeat: repeat;
-    transform: rotate(-10deg);
-    opacity: 0.04;
-    filter: brightness(1) invert(2);
-  }
-  
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: url("/images/logo.png");
+  background-size: 100px;
+  background-repeat: repeat;
+  transform: rotate(-10deg);
+  opacity: 0.04;
+  filter: brightness(1) invert(2);
+}

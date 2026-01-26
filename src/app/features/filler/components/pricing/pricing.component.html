@@ -1,0 +1,63 @@
+<section class="bg-cream py-24" id="pricing">
+  <p class="text-3xl font-semibold pb-10 text-center">Filler Pricing</p>
+
+  <div class="layout-container-lg grid grid-cols-1 md:grid-cols-2 gap-6">
+
+    @for (service of fillerData; track service.id) {
+
+      @for (opt of service.options; track opt.id) {
+
+        <div class="bg-white rounded-2xl p-6 flex justify-between gap-6 relative">
+
+          <!-- LEFT CONTENT -->
+          <div class="flex flex-col justify-between max-w-[60%]">
+            <div>
+              <h3 class="text-lg font-semibold mb-1">
+                {{ service.name }}
+              </h3>
+
+              <p class="text-sm font-medium text-brown mb-2">
+                {{ opt.optionName }}
+              </p>
+
+              <p class="text-sm text-gray-600 mb-4">
+                {{ opt.notes }}
+              </p>
+            </div>
+
+            <div>
+              <p class="text-xl font-semibold">
+                {{ opt.price }} EGP
+                <span class="text-sm font-normal text-gray-500">
+                  / 1 ml
+                </span>
+              </p>
+            </div>
+          </div>
+
+          <!-- RIGHT IMAGE -->
+          <div class="relative w-35 h-35">
+            <img
+              [src]="service.image"
+              [alt]="service.name"
+              class="w-full h-full object-cover rounded-xl"
+            />
+
+            <!-- PLUS BUTTON -->
+            <button
+              (click)="openBookingModal()"
+              class="absolute -top-3 -right-3 w-9 h-9 rounded-full border border-brown text-brown flex items-center justify-center bg-white hover:bg-brown hover:text-white transition-colors cursor-pointer">
+              +
+            </button>
+          </div>
+
+        </div>
+
+      }
+    }
+
+  </div>
+
+  <!-- Booking Modal -->
+  <app-booking #bookingModal></app-booking>
+</section>
