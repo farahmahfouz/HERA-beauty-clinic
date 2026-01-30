@@ -1,6 +1,6 @@
-<section class="flex items-center gap-14 layout-container-lg py-10">
+<section class="flex flex-col lg:flex-row items-center gap-14 layout-container-lg py-10">
   <div class="space-y-8 max-w-2xl">
-    <h2 class="text-4xl font-semibold tracking-wider text-dark">
+    <h2 class="text-3xl lg:text-4xl font-semibold tracking-wider text-dark">
       {{ title }}
     </h2>
 
@@ -12,7 +12,7 @@
     </p>
   </div>
 
-  <div class="w-4xl h-96 overflow-hidden">
+  <div class="w-full lg:w-4xl h-96 overflow-hidden">
     <img [src]="image" [alt]="title" class="w-full h-full object-cover" />
   </div>
 </section>

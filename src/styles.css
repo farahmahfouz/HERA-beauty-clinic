@@ -1,6 +1,10 @@
 /* You can add global styles to this file, and also import other style files */
+/* You can add global styles to this file, and also import other style files */
+/* You can add global styles to this file, and also import other style files */
+
 @import "tailwindcss";
 @plugin "daisyui";
+
 
 /* Custom Colors */
 @theme {
@@ -91,7 +95,7 @@ dialog::backdrop {
 
 .bg-circle::before {
   top: 58%;
-  left: 33%;
+  left: 44%;
 }
 
 .bg-circle::after {

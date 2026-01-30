@@ -4,7 +4,8 @@
 
         <!-- Name -->
         <app-control label="Name">
-            <input type="text" name="name" required placeholder="Your name" formControlName="name" />
+            <input type="text" name="name" required placeholder="Your name" formControlName="name"
+                autocomplete="name" />
             @if (name) {
             <small class="text-red-500 text-sm pb-2">
                 Name is required
@@ -14,7 +15,7 @@
 
         <app-control label="Username">
             <input type="text" name="username" required minlength="4" placeholder="yourusername"
-                formControlName="username" />
+                formControlName="username" autocomplete="username" />
             @if (username) {
             <small class="text-red-500 text-sm">
                 @if (form.controls.username.errors?.['required']) {
@@ -29,7 +30,8 @@
 
         <!-- Email -->
         <app-control label="Email">
-            <input type="email" name="email" required placeholder="you@example.com" formControlName="email" />
+            <input type="email" name="email" required placeholder="you@example.com" formControlName="email"
+                autocomplete="email" />
             @if (email) {
             <small class="text-red-500 text-sm">
                 @if (form.controls.email.errors?.['required']) {
@@ -45,7 +47,7 @@
         <!-- Password -->
         <app-control label="Password">
             <input type="password" name="password" minlength="8" required placeholder="********"
-                formControlName="password" />
+                formControlName="password" autocomplete="new-password" />
             @if (password) {
             <small class="text-red-500 text-sm">
                 @if (form.controls.password.errors?.['required']) {
@@ -78,8 +80,13 @@
         </app-control>
 
         <!-- Submit -->
-        <button type="submit" appButton variant="primary">
-            Sign Up
+        <button type="submit" appButton variant="primary" [disabled]="isLoading">
+            @if(isLoading){
+            <span class="loading loading-spinner loading-sm pe-0.5"></span>
+            <span>Loading...</span>
+            } @else {
+            <span>Sign Up</span>
+            }
         </button>
 
     </form>

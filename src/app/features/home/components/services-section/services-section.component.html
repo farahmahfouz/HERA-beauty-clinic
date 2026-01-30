@@ -1,64 +1,48 @@
-<section class="services-section relative bg-white py-20 overflow-hidden">
-    <div class="container mx-auto px-6">
-        <h2 class="text-5xl lg:text-6xl font-bold text-dark leading-tight pb-16">
-            SEE THE WORLD IN STYLE
-        </h2>
-        <div class="grid grid-cols-1 lg:grid-cols-5 gap-20 lg:gap-24 items-start">
-            <!-- Left Side: Content -->
-            <div class="space-y-8 lg:col-span-2">
+<section class="grid gap-12 py-20 layout-container-lg">
+    <h1 class="text-center text-3xl md:text-4xl font-bold tracking-wider capitalize text-dark">our services for your beauty</h1>
+    @for (service of services; track service._id; let i = $index) {
 
-                <!-- Content Cards -->
-                <div class="space-y-10">
-                    <!-- Large Dark Card -->
-                    <div class="bg-dark text-white p-8 rounded-4xl shadow-xs">
-                        <h3 class="text-2xl font-semibold mb-4">Affordable Luxury</h3>
-                        <p class="text-gray-300 leading-relaxed">
-                            Experience premium healthcare services at accessible prices. We believe everyone deserves
-                            the best care without compromise.
-                        </p>
-                    </div>
-                    <div class="bg-light-gray p-6 rounded-4xl shadow-xs">
-                        <h3 class="text-xl font-semibold text-dark mb-3">Lab Tested Approved Formulas</h3>
-                        <p class="text-gray-600 text-sm">
-                            All our treatments are clinically tested and approved by medical professionals.
-                        </p>
-                    </div>
+    <div class="grid grid-cols-1 md:grid-cols-2 items-center md:pt-10 ا" [class.md:grid-flow-col-dense]="i % 2 === 1">
+        <!-- Image -->
+        <div class="w-full relative step-img-box flex items-center justify-center pb-5 md:pb-0"
+            [class.md:col-start-2]="i % 2 === 1">
+            <img [src]="service.coverImage" [alt]="service.name" class="w-80 h-80 lg:w-96 lg:h-96  rounded-full object-cover z-10" />
+        </div>
 
-                    <div class="bg-light-gray p-6 rounded-4xl shadow-xs">
-                        <h3 class="text-xl font-semibold text-dark mb-3">100% Natural</h3>
-                        <p class="text-gray-600 text-sm">
-                            We use only natural and safe ingredients in all our procedures and treatments.
-                        </p>
-                    </div>
+        <!-- Description -->
+        <div class="flex flex-col gap-3 items-center">
+            <h3 class="text-3xl font-semibold uppercase text-dark">
+                {{ service.name }}
+            </h3>
 
+            <p class="text-dark/50 leading-relaxed text-xl text-center">
+                {{ service.description }}
+            </p>
 
-                </div>
-            </div>
-
-            <!-- Right Side: Images -->
-            <div class=" lg:col-span-3">
-                <div class="flex justify-end gap-6">
-                    <!-- Left Image -->
-                    <div class="relative">
-                        <img src="/images/products.jpg" alt="Clinic Services"
-                            class=" h-120 object-cover rounded-4xl shadow-lg"
-                            onerror="this.src='https://images.unsplash.com/photo-1559757148-5c350d0d3c56?w=500&h=600&fit=crop'" />
-                    </div>
-
-                    <!-- Right Image -->
-                    <div class="card">
-                        <div class="card-img">
-                            <img src="/images/product.webp" alt="Medical Care" class="rounded-4xl"
-                                onerror="this.src='https://images.unsplash.com/photo-1576091160399-112ba8d25d1f?w=500&h=600&fit=crop'" />
-                        </div>
-                        <div class="tag">
-                            <p><span>Learn More</span></p>
-                        </div>
-                        <div class="curve-one"></div>
-                        <div class="curve-two"></div>
-                    </div>
-                </div>
-            </div>
+            <app-ratings [value]="service.ratingsAverage" />
+            <div class="flex flex-col gap-3 mt-6 items-center text-center">
+                <p class="text-sm uppercase tracking-widest text-dark/40">
+                  Available treatments
+                </p>
+              
+                @for (sub of service.subServices; track sub.id) {
+                  <a
+                    [routerLink]="['/services', sub.slug]"
+                    class="text-lg font-medium text-dark
+                           hover:translate-x-1 hover:text-dark/70
+                           transition-all duration-200 capitalize"
+                  >
+                    ✦ {{ sub.name }}
+                  </a>
+                }
+              
+                <p class="text-sm text-dark/50 mt-2">
+                  Personalized sessions based on your skin & hair needs
+                </p>
+              
+              </div>
+              
         </div>
     </div>
+    }
 </section>

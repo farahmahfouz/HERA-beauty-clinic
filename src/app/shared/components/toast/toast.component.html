@@ -1,0 +1,39 @@
+@if (toast.message()) {
+    <div class="toast toast-top toast-end z-50">
+      <div
+        class="flex items-center gap-4 px-6 py-4 rounded-2xl shadow-lg
+               bg-cream/80 min-w-[320px] max-w-1050px backdrop-blur-sm border-gray-400">
+  
+        <!-- Icon -->
+        <div
+          class="flex items-center justify-center w-10 h-10 rounded-full"
+          [ngClass]="{
+            'text-green-600': toast.type() === 'success',
+            'text-red-600': toast.type() === 'error'
+          }"
+        >
+          @if (toast.type() === 'success') {
+            <!-- check icon -->
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none"
+                 viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round"
+                    stroke-width="2" d="M5 13l4 4L19 7" />
+            </svg>
+          } @else {
+            <!-- x icon -->
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none"
+                 viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round"
+                    stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+            </svg>
+          }
+        </div>
+  
+        <!-- Message -->
+        <p class="text-base font-semibold text-gray-800">
+          {{ toast.message() }}
+        </p>
+      </div>
+    </div>
+  }
+  

@@ -1,0 +1,28 @@
+calendar-date {
+  --color-accent: #22c55e;        /* أخضر للأيام المتاحة */
+  --color-text-on-accent: #fff;
+}
+
+/* اليوم المتاح */
+calendar-date::part(day) {
+  border-radius: 9999px;
+}
+
+/* اليوم المختار */
+calendar-date::part(selected) {
+  background-color: #16a34a;
+  color: white;
+}
+
+/* اليوم غير المتاح */
+calendar-date::part(disabled) {
+  background-color: #fecaca;
+  color: #dc2626;
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* hover على المتاح */
+calendar-date::part(day):hover {
+  background-color: #bbf7d0;
+}

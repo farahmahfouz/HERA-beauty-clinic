@@ -4,12 +4,12 @@ import { ServicesSectionComponent } from './components/services-section/services
 import { LogoComponent } from './components/logo/logo.component';
 import { LaserMachineComponent } from './components/laser-machine/laser-machine.component';
 import { ReviewsComponent } from "./components/reviews/reviews.component";
-import { FillerComponent } from './components/filler/filler.component';
+import { PopupComponent } from "./components/popup/popup.component";
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [HeroSectionComponent, ServicesSectionComponent, LogoComponent, LaserMachineComponent, ReviewsComponent, FillerComponent],
+  imports: [HeroSectionComponent, ServicesSectionComponent, LogoComponent, LaserMachineComponent, ReviewsComponent, PopupComponent],
   templateUrl: './home.component.html',
   styles: ``
 })

@@ -1,4 +1,5 @@
 import { Routes } from '@angular/router';
+import { resolveTitle } from './features/services/services.component';
 
 export const routes: Routes = [
     {
@@ -7,14 +8,9 @@ export const routes: Routes = [
         title: 'Home'
     },
     {
-        path: 'laser-hair-removal',
-        loadComponent: () => import('./features/laser-hair-removal/laser-hair-removal.component').then(m => m.LaserHairRemovalComponent),
-        title: 'Laser Hair Removal'
-    },
-    {
-        path: 'filler',
-        loadComponent: () => import('./features/filler/filler.component').then(m => m.FillerComponent),
-        title: 'Filler'
+        path: 'services/:slug',
+        loadComponent: () => import('./features/services/services.component').then(m => m.ServicesComponent),
+        title: resolveTitle
     },
     {
         path: 'about',

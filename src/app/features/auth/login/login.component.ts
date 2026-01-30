@@ -4,6 +4,7 @@ import { FormsModule, NgForm } from '@angular/forms';
 import { debounceTime } from 'rxjs';
 import { ControlComponent } from "../../../shared/components/control/control.component";
 import { ButtonComponent } from '../../../shared/components/button/button.component';
+import { AuthService } from '../../../core/services/auth.service';
 
 @Component({
   selector: 'app-login',
@@ -15,10 +16,10 @@ import { ButtonComponent } from '../../../shared/components/button/button.compon
 export class LoginComponent {
   private form = viewChild.required<NgForm>('form');
   private modal = viewChild.required<ModalComponent>('modal');
-  private destroyRef = inject(DestroyRef);
   closeModal = output<void>();
+  isLoading = false;
 
-  constructor() {
+  constructor(private authService: AuthService, private destroyRef: DestroyRef) {
     afterNextRender(() => {
       // Open modal when component loads
       this.modal().open();
@@ -47,10 +48,17 @@ export class LoginComponent {
     if (formData.form.invalid) return;
     const email = formData.form.value.email;
     const password = formData.form.value.password;
-    console.log(formData)
-    console.log(email, password);
-    console.log(formData.form);
-    console.log('Form Submitted', formData.reset());
+
+    this.isLoading = true;
+    this.authService.login({ email, password }).subscribe({
+      next: (res) => {
+        this.isLoading = false;
+        this.onCloseModal()
+      },
+      error: (err) => {
+        console.error(err);
+      }
+    })
     formData.reset();
   }
 }

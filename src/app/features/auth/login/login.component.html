@@ -5,7 +5,7 @@
         <!-- Email -->
         <app-control label="Email">
             <input type="email" name="email" id="email" required placeholder="you@example.com" ngModel email
-                #email="ngModel"/>
+                #email="ngModel" autocomplete="email" />
             @if (email.invalid && (email.touched || email.dirty)) {
             <small class="text-red-500 text-sm">
                 @if (email.errors?.['required']) {
@@ -21,7 +21,7 @@
         <!-- Password -->
         <app-control label="Password">
             <input type="password" name="password" minlength="8" required placeholder="********" ngModel password
-                #password="ngModel" />
+                #password="ngModel" autocomplete="current-password" />
             @if (password.invalid && (password.touched || password.dirty)) {
             <small class="text-red-500 text-sm">
                 @if (password.errors?.['required']) {
@@ -34,9 +34,13 @@
             }
         </app-control>
 
-        <button type="submit" appButton variant="primary">
-            Login
+        <button type="submit" appButton variant="primary" [disabled]="isLoading">
+            @if(isLoading){
+            <span class="loading loading-spinner loading-sm pe-0.5"></span>
+            <span>Loading...</span>
+            } @else {
+            <span>Login</span>
+            }
         </button>
-
     </form>
 </app-modal>

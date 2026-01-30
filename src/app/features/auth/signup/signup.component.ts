@@ -1,8 +1,9 @@
-import { afterNextRender, Component, output, viewChild } from '@angular/core';
+import { afterNextRender, Component, OnInit, output, viewChild } from '@angular/core';
 import { ModalComponent } from "../../../shared/components/modal/modal.component";
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ButtonComponent } from '../../../shared/components/button/button.component';
 import { ControlComponent } from "../../../shared/components/control/control.component";
+import { AuthService } from '../../../core/services/auth.service';
 
 @Component({
   selector: 'app-signup',
@@ -14,6 +15,8 @@ import { ControlComponent } from "../../../shared/components/control/control.com
 export class SignupComponent {
   private modal = viewChild.required<ModalComponent>('modal');
   closeModal = output<void>();
+  isLoading = false;
+
   form = new FormGroup({
     name: new FormControl('', {
       validators: [Validators.required]
@@ -71,7 +74,7 @@ export class SignupComponent {
       this.form.controls.phone.invalid
   }
 
-  constructor() {
+  constructor(private authService: AuthService) {
     afterNextRender(() => {
       // Open modal when component loads
       this.modal().open();
@@ -87,6 +90,16 @@ export class SignupComponent {
       console.log('Invalid');
       return
     }
-    console.log(this.form)
+
+    this.isLoading = true;
+    this.authService.signup(this.form.value).subscribe({
+      next: (res) => {
+        this.isLoading = false;
+        this.onCloseModal();
+      },
+      error: (err) => {
+        console.error(err);
+      }
+    })
   }
 }

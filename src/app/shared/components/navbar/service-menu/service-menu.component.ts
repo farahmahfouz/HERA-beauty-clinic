@@ -1,52 +1,42 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, DestroyRef, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { RouterLink } from '@angular/router';
+import { ServicesService } from '../../../../core/services/services.service';
+import { NgIf } from '@angular/common';
 
 @Component({
   selector: 'app-service-menu',
   standalone: true,
-  imports: [],
+  imports: [RouterLink, NgIf],
   templateUrl: './service-menu.component.html',
   styleUrl: './service-menu.component.css'
 })
-export class ServiceMenuComponent {
-   @Input() isOpen = false;
-    @Output() close = new EventEmitter<void>();
-   services = [
-    {
-      title: 'AESTHETIC DERMATOLOGY',
-      items: [
-        'Fillers',
-        'Botox',
-        'HIFU Face',
-        'Peeling',
-        'PRP',
-        'Exosome Therapy',
-      ],
-    },
-    {
-      title: 'BODY CONTOURING',
-      items: [
-        'Mesotherapy Body',
-        'HIFU Body',
-        'Carboxy',
-      ],
-    },
-    {
-      title: 'LASER TREATMENTS',
-      items: [
-        'Laser Hair Removal',
-        'Laser Skin Resurfacing',
-        'Laser Vein Treatment',
-      ],
-    },
-    {
-      title: 'ULTRA SKIN CARE',
-      items: [
-        'ULTRA-Oil Controlling',
-        'ULTRA-Hydrating',
-        'ULTRA-Firming',
-        'ULTRA-Lightening',
-        'Classic Treatment',
-      ],
-    },
-  ];
+export class ServiceMenuComponent implements OnInit {
+  @Input() isOpen = false;
+  @Output() close = new EventEmitter<void>();
+  services: any[] = [];
+  isLoading = true;
+  error?: string;
+
+  constructor(private serviceService: ServicesService, private destroyRef: DestroyRef) { }
+  
+  ngOnInit() {
+    const subscription = this.serviceService.loadServices().subscribe({
+      next: (service) => {
+        this.services = service;
+        this.isLoading = false;
+      },
+      error: (err) => {
+        this.error = 'Failed to load services';
+        this.isLoading = false;
+      }
+    });
+
+    this.destroyRef.onDestroy(() => {
+      subscription.unsubscribe();
+    });
+  }
+
+  onClose() {
+    this.close.emit();
+  }
 }

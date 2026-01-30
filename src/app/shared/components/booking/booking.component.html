@@ -1,77 +1,103 @@
 <app-modal>
-    <div class=" max-w-2xl text-dark">
+  <form class="max-w-2xl text-dark" #form="ngForm" (ngSubmit)="onSubmit(form)">
 
-        <h3 class="font-bold text-xl mb-6">
-            Book Appointment
-        </h3>
+    <h3 class="font-bold text-xl mb-6">
+      Book Appointment
+    </h3>
 
-        <!-- Doctor Select -->
-        <div class="form-control mb-4">
-            <label class="label">
-                <span class="label-text">Select Doctor</span>
-            </label>
-            <select class="select select-bordered" >
-                <option disabled selected>Choose doctor</option>
-                <option >
-                    <!-- {{ doctor.name }} -->
-                      Dr Dina
-                </option>
-            </select>
-        </div>
+    <!-- Doctors -->
+    <div class="mb-6">
+      <p class="font-medium mb-2">Doctors</p>
 
-        <!-- Date Picker -->
-        <div class="form-control mb-4">
-            <label class="label">
-                <span class="label-text">Select Date</span>
-            </label>
-            <input type="date" class="input input-bordered"  />
-        </div>
+      <select class="select select-bordered w-full" name="doctorSchedule" ngModel required
+        (change)="onDoctorChange($event)">
+        <option disabled selected value="">
+          Choose doctor
+        </option>
 
-        <!-- Available Time Slots -->
-        <div class="mb-6" >
-            <p class="font-medium mb-2">Available Time</p>
-
-            <div class="grid grid-cols-3 gap-2">
-                <label  class="btn btn-outline">
-                    <input type="radio" name="timeSlot" class="hidden"  />
-                    <!-- {{ slot.start }} - {{ slot.end }} --> 9: 7
-                </label>
-            </div>
-        </div>
-
-        <!-- Services -->
-        <div class="mb-6">
-            <p class="font-medium mb-2">Services</p>
-
-            <div class="space-y-2">
-                <label class="flex items-center gap-3">
-                    <input type="checkbox" class="checkbox checkbox-primary"  />
-                    <span>
-                        <!-- {{ option.optionName }} --> laser
-                        <span class="text-sm text-gray-400">
-                            <!-- ({{ option.price }} EGP) --> 500
-                        </span>
-                    </span>
-                </label>
-            </div>
-        </div>
-
-        <!-- Total -->
-        <div class="flex justify-between items-center mb-6">
-            <span class="font-semibold">Total</span>
-            <span class="text-lg font-bold">
-                500 EGP
-            </span>
-        </div>
-
-        <!-- Actions -->
-        <div class="modal-action">
-            <button appButton variant="tertiary" >
-                Cancel
-            </button>
-            <button appButton variant="secondary" >
-                Confirm Booking
-            </button>
-        </div>
+        @for (schedule of scheduales; track schedule._id) {
+        <option [value]="schedule._id">
+          {{ schedule.doctor.name }}
+        </option>
+        }
+      </select>
     </div>
+
+    <!-- Calendar -->
+    @if (selectedSchedule) {
+    <div class="flex justify-center">
+      <calendar-date class="cally bg-base-100 border border-base-300 rounded-box" (change)="onDateChange($event)">
+        <svg slot="previous" class="fill-current size-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+          <path d="M15.75 19.5 8.25 12l7.5-7.5"></path>
+        </svg>
+
+        <svg slot="next" class="fill-current size-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+          <path d="m8.25 4.5 7.5 7.5-7.5 7.5"></path>
+        </svg>
+
+        <calendar-month></calendar-month>
+      </calendar-date>
+    </div>
+    }
+
+    <!-- Time Slots -->
+    @if (selectedDay) {
+    @if (selectedDay.slots?.length) {
+    <div class="mt-6">
+      <p class="font-medium mb-2">
+        Available Times – {{ selectedDay.day ?? selectedDay.date }}
+      </p>
+
+      <div class="grid grid-cols-2 gap-3">
+        @for (slot of selectedDay.slots; track slot._id) {
+        <label class="btn btn-outline cursor-pointer">
+          <input type="radio" name="timeSlot" [value]="slot" [(ngModel)]="selectedSlot" required class="hidden" />
+          {{ slot.start }} - {{ slot.end }}
+        </label>
+        }
+      </div>
+    </div>
+    }
+    @else {
+    <p class="font-medium pt-4 text-center text-gray-400">
+      No available times for {{ selectedDay.day ?? selectedDay.date }}
+    </p>
+    }
+    }
+
+    <!-- Service -->
+    @if (selectedService) {
+    <div class="mt-6">
+      <p class="font-medium mb-2">Service</p>
+
+      <label class="flex items-center gap-3">
+        <input type="checkbox" name="service" [ngModel]="selectedService" checked disabled />
+        <span>
+          {{ selectedService.optionName }}
+          <span class="text-sm text-gray-400">
+            ({{ selectedService.price }} EGP)
+          </span>
+        </span>
+      </label>
+    </div>
+
+    <div class="flex justify-between items-center mt-4">
+      <span class="font-semibold">Total</span>
+      <span class="text-lg font-bold">
+        {{ selectedService.price }} EGP
+      </span>
+    </div>
+    }
+
+    <!-- Submit -->
+    <button appButton type="submit" [disabled]="form.invalid || !selectedDay">
+      @if(isLoading){
+      <span class="loading loading-spinner loading-sm pe-0.5"></span>
+      <span>Loading...</span>
+      } @else {
+      <span>Confirm Booking</span>
+      }
+    </button>
+
+  </form>
 </app-modal>

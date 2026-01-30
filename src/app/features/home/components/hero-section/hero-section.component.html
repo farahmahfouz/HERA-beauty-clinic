@@ -1,27 +1,26 @@
-<section class="bg-cream pt-20">
-  <div class=" grid grid-cols-2 layout-container-lg items-center gap-24 py-12">
-    <div class="flex flex-wrap gap-2">
-
-      <div class="shrink h-77.5 overflow-hidden">
-        <img src="/images/inject.jpg" class="w-full h-full object-cover hover:scale-120 duration-500 ease-in-out" />
+<section class="bg-cream pt-10 md:pt-20">
+  <div class="grid grid-cols-1 lg:grid-cols-2 layout-container-lg items-center justify-center gap-12 lg:gap-24 py-12">
+    <div class="flex flex-wrap gap-2 justify-center lg:justify-start">
+      <div class="shrink h-77.5 overflow-hidden hidden md:block">
+        <img src="/images/inject.jpg" class="w-full h-full object-cover hover:scale-120 duration-500 ease-in-out z-10" />
       </div>
 
-      <div class="grow h-77.5 overflow-hidden">
-        <img src="/images/clinic.jpg" class="w-full h-full object-cover hover:scale-120 duration-500 ease-in-out" />
+      <div class="grow h-77.5 overflow-hidden hidden md:block">
+        <img src="/images/clinic.jpg" class="w-full h-full object-cover hover:scale-120 duration-500 ease-in-out z-10" />
       </div>
 
-      <div class="grow h-77.5 overflow-hidden">
-        <img src="/images/candel.jpg" class="w-full h-full object-cover hover:scale-120 duration-500 ease-in-out" />
+      <div class="grow h-77.5 overflow-hidden hidden md:block">
+        <img src="/images/candel.jpg" class="w-full h-full object-cover hover:scale-120 duration-500 ease-in-out z-10" />
       </div>
       
-      <div class="shrink h-77.5 overflow-hidden">
-        <img src="/images/laser.jpg" class="w-full h-full object-cover hover:scale-120 duration-500 ease-in-out" />
+      <div class="shrink h-77.5 overflow-hidden hidden md:block">
+        <img src="/images/laser.jpg" class="w-full h-full object-cover hover:scale-120 duration-500 ease-in-out z-10" />
       </div>    
     </div>
     
     <div class="space-y-4">
-      <h1 class="text-5xl font-semibold uppercase font-serif tracking-wide leading-6.7">{{'welcome in hera clinic' | letter:100 | async}}</h1>
-      <p class="py-6 text-2xl font-light mb-12">
+      <h1 class="text-3xl sm:text-4xl lg:text-5xl font-semibold uppercase font-serif tracking-wide leading-tight lg:leading-6.7">{{'welcome in hera clinic' | letter:100 | async}}</h1>
+      <p class="py-3 md:py-6 text-lg sm:text-xl lg:text-2xl font-light md:mb-12">
         Your first step toward self-acceptance, care, and confidence
       </p>
       <button appButton variant="tertiary">

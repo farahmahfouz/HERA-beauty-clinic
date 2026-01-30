@@ -146,7 +146,7 @@
 
 .bg-circle::before {
   top: 58%;
-  left: 33%;
+  left: 44%;
 }
 
 .bg-circle::after {
@@ -171,5 +171,38 @@
 
   .machine img {
     max-width: 260px;
+  }
+}
+
+
+@media (max-width: 900px) {
+  .feature-title::before,
+  .feature-title::after,
+  .feature-text::before,
+  .bg-circle::before,
+  .bg-circle::after {
+    display: none;
+  }
+
+  .laser-section {
+    padding: 4rem 1.5rem;
+  }
+
+  .features {
+    gap: 3rem;
+  }
+
+  .feature-text {
+    max-width: 100%;
+  }
+
+  .machine {
+    order: -1; 
+    margin-bottom: 3rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    z-index: 5;
   }
 }

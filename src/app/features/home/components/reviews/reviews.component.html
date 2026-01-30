@@ -1,12 +1,11 @@
 <section class="py-20 overflow-hidden">
     <div class="layout-container-lg">
-      <div class="card lg:card-side bg-cream shadow-sm rounded-none">
-  
-        <figure>
-          <img src="/images/review.webp" alt="reviews" class="w-4xl" />
-        </figure>
-  
-        <div class="card-body flex flex-col items-center ">
+      <div class="flex flex-col lg:flex-row bg-cream shadow-sm rounded-none">
+        <div class="lg:w-3/5">
+          <img src="/images/review.webp" alt="reviews" class="w-full h-full object-cover" />
+        </div>
+
+        <div class="card-body items-center lg:w-2/5">
   
           <img src="/images/logo.png" class="w-28 h-28 object-contain" />
   
@@ -21,13 +20,13 @@
                 class="min-w-full flex flex-col items-center space-y-4 px-6"
               >
                 <h2 class="text-2xl text-center font-semibold">
-                  {{ review.name }}
+                  {{ review.user.name }}
                 </h2>
   
                 <app-ratings [value]="review.rating" />
   
                 <p class="text-lg text-center max-w-xl">
-                  {{ review.text }}
+                  {{ review.review }}
                 </p>
               </div>
             </div>
@@ -37,7 +36,7 @@
             <button
               *ngFor="let r of reviews; let i = index"
               (click)="goTo(i)"
-              class="w-3 h-3 rounded-full transition-all"
+              class="w-3 h-3 rounded-full transition-all mt-auto"
               [ngClass]="
                 activeIndex === i ? 'bg-dark scale-110' : 'bg-dark/30'
               "
@@ -48,4 +47,3 @@
       </div>
     </div>
   </section>
-  

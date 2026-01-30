@@ -1,0 +1,48 @@
+<section class="bg-cream py-24" id="pricing">
+    <p class="text-3xl font-semibold pb-10 text-center">Pricing</p>
+
+    <div class="layout-container-lg grid grid-cols-1 md:grid-cols-2 gap-6">
+
+        @for (option of options; track option._id) {
+        <div class="bg-white rounded-2xl p-6 flex justify-between gap-6 relative">
+
+            <!-- LEFT CONTENT -->
+            <div class="flex flex-col justify-between max-w-[60%]">
+                <div>
+                    <h3 class="text-lg font-semibold mb-2">
+                        {{ option.optionName }}
+                    </h3>
+
+                    <p class="text-sm text-gray-600 mb-4">
+                        {{ option.notes }}
+                    </p>
+                </div>
+
+                <div>
+                    <p class="text-xl font-semibold">
+                        ${{ option.price }}
+                    </p>
+                </div>
+            </div>
+
+            <!-- RIGHT IMAGE -->
+            <div class="relative w-35 h-35 ">
+                <img src="/images/laser-placeholder.jpg" alt="Laser Service"
+                    class="w-full h-full object-cover rounded-xl" />
+
+                <!-- PLUS BUTTON -->
+                <button
+                    (click)="openBookingModal(option)"
+                    class="absolute -top-3 -right-3 w-9 h-9 rounded-full border border-brown text-brown flex items-center justify-center bg-white hover:bg-brown hover:text-white transition-colors cursor-pointer">
+                    +
+                </button>
+            </div>
+
+        </div>
+        }
+
+    </div>
+
+    <!-- Booking Modal -->
+    <app-booking #bookingModal></app-booking>
+</section>

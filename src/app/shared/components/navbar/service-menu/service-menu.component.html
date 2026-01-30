@@ -1,22 +1,36 @@
-<div class="backdrop" [class.show]="isOpen" (click)="close.emit()"></div>
-<div class="absolute left-1/2 top-full w-full -translate-x-1/2
-         bg-cream p-10 z-50" [class.animate-mega-in]="isOpen" [class.animate-mega-out]="!isOpen">
-    <div class="grid grid-cols-4 justify-items-center gap-20">
-        @for (service of services; track service.title) {
-        <div>
-            <h3 class="text-amber-600 font-semibold mb-4">
-                {{ service.title }}
-            </h3>
 
-            <ul class="space-y-5 text-gray-700">
-                @for (item of service.items; track item) {
-                <li class="cursor-pointer hover:text-purple-500 transition">
-                    {{ item }}
-                </li>
-                }
-            </ul>
-        </div>
-        }
+<!-- MEGA MENU -->
+<div
+  *ngIf="isOpen"
+  class="absolute left-0 lg:left-1/2 top-full w-full lg:-translate-x-1/2
+         bg-cream/90 px-6 py-8 lg:p-10 z-50
+         max-h-[80vh] overflow-y-auto
+         animate-mega-in"
+>
+  <div
+    class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4
+           gap-10 lg:gap-20 text-center lg:text-left"
+  >
+    @for (service of services; track service.id) {
+      <div>
+        <h3 class="text-amber-600 font-semibold mb-4 uppercase text-sm lg:text-base">
+          {{ service.name }}
+        </h3>
 
-    </div>
+        <ul class="space-y-3 lg:space-y-5 text-gray-700 text-sm lg:text-base">
+          @for (subService of service.subServices; track subService.id) {
+            <li>
+              <a
+                [routerLink]="['/services', subService.slug]"
+                class="block hover:text-amber-500 transition capitalize"
+                (click)="onClose()"
+              >
+                {{ subService.name }}
+              </a>
+            </li>
+          }
+        </ul>
+      </div>
+    }
+  </div>
 </div>

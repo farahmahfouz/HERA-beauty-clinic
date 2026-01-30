@@ -2,6 +2,8 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { RatingsComponent } from "../../../../shared/components/ratings/ratings.component";
 import { NgClass, NgFor } from '@angular/common';
 import { interval, Subscription } from 'rxjs';
+import { ReviewsService } from '../../../../core/services/reviews.service';
+import { Review } from './reviews';
 
 @Component({
   selector: 'app-reviews',
@@ -11,39 +13,26 @@ import { interval, Subscription } from 'rxjs';
   styleUrl: './reviews.component.css'
 })
 export class ReviewsComponent implements OnInit, OnDestroy {
-  reviews = [
-    {
-      name: 'Farah Mahfouz',
-      text: 'Amazing! They are friendly and welcoming. Had my first laser session today. Would definitely recommend this clinic. Heba is really professional and friendly. She was fast too ... Thanks Heba.',
-      rating: 5,
-    },
-    {
-      name: 'Sara Ahmed',
-      text: 'Very professional staff and great results.',
-      rating: 4,
-    },
-    {
-      name: 'Mona Ali',
-      text: 'Clean clinic and smooth experience.',
-      rating: 5,
-    },
-    {
-      name: 'Nour Hassan',
-      text: 'Loved the service, highly recommended!',
-      rating: 5,
-    },
-    {
-      name: 'Aya Mostafa',
-      text: 'Friendly team and excellent care.',
-      rating: 4,
-    },
-  ];
-
+  constructor(private reviewsServices: ReviewsService) { }
+  reviews?: Review[];
+  isLoading = true;
+  error?: string;
   activeIndex = 0;
   autoSlideSub!: Subscription;
 
   ngOnInit() {
     this.startAutoSlide();
+    this.reviewsServices.getAllReviews().subscribe({
+      next: (review) => {
+        this.reviews = review;
+        this.isLoading = false;
+      },
+      error: (error) => {
+        console.error('Error loading Reviews:', error);
+        this.error = 'Error loading reviews';
+        this.isLoading = false;
+      }
+    })
   }
 
   ngOnDestroy() {
@@ -57,8 +46,10 @@ export class ReviewsComponent implements OnInit, OnDestroy {
   }
 
   next() {
-    this.activeIndex =
-      (this.activeIndex + 1) % this.reviews.length;
+    if (!this.reviews || this.reviews.length === 0) {
+      return;
+    }
+    this.activeIndex = (this.activeIndex + 1) % this.reviews.length;
   }
 
   goTo(index: number) {
