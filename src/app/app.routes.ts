@@ -16,5 +16,10 @@ export const routes: Routes = [
         path: 'about',
         loadComponent: () => import('./features/clinc-info/clinc-info.component').then(m => m.ClincInfoComponent),
         title: 'About Us'
+    },
+    {
+        path: 'account',
+        loadComponent: () => import('./features/profile/profile.component').then(m => m.ProfileComponent),
+        title: 'Account'
     }
 ];

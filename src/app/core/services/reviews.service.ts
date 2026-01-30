@@ -2,7 +2,6 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { map } from 'rxjs';
 import { Review } from '../../features/home/components/reviews/reviews';
-import { environment } from '../utils/environment';
 
 @Injectable({
   providedIn: 'root'

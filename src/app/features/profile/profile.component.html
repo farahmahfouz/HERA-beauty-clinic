@@ -1,0 +1,27 @@
+<main class="pt-36 bg-cream">
+    <div class="layout-container-lg">
+
+        <!-- Header -->
+        <div class="mb-8 ">
+            <h1 class="text-3xl font-semibold text-dark tracking-tight">My Account</h1>
+            <p class="text-gray-500 mt-3">Manage your account information and bookings</p>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-4 gap-8">
+            <!-- Sidebar -->
+            <app-sidebar [activeTab]="activeTab" (tabChange)="setActiveTab($event)">
+            </app-sidebar>
+
+
+            <!-- Content -->
+            <div class="lg:col-span-3 space-y-8">
+
+                <app-user-info *ngIf="activeTab === 'profile'" [user]="user"></app-user-info>
+                <app-user-bookings *ngIf="activeTab === 'bookings'" [bookings]="bookings"></app-user-bookings>
+                <app-change-password *ngIf="activeTab === 'password'"></app-change-password>
+
+            </div>
+        </div>
+    </div>
+
+</main>

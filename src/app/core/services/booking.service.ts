@@ -14,4 +14,13 @@ export class BookingService {
       map(res => console.log(res))
     )
   }
+
+  getMyBookings(){
+    return this.httpClient.get<any>('booking/my-bookings').pipe(
+      map(res => {
+        console.log(res);
+        return res.data.bookings;
+      })
+    )
+  }
 }

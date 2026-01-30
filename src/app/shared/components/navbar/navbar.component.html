@@ -41,6 +41,9 @@
                 (click)="openLogoutConfirm()">
                 Logout
             </p>
+            <a routerLink="/account" class="text-dark cursor-pointer hover:text-gray-800" *ngIf="auth.isLoggedIn">
+                Account
+            </a>
             <app-confirm-modal [isOpen]="showLogoutConfirm" title="Logout" message="Are you sure you want to logout?"
                 (confirm)="confirmLogout()" (cancel)="cancelLogout()">
             </app-confirm-modal>
@@ -88,6 +91,9 @@
         <p *ngIf="auth.isLoggedIn" class="text-dark cursor-pointer hover:text-gray-800" (click)="openLogoutConfirm()">
             Logout
         </p>
+        <a routerLink="/account" class="text-dark cursor-pointer hover:text-gray-800" *ngIf="auth.isLoggedIn">
+            Account
+        </a>
         <app-confirm-modal [isOpen]="showLogoutConfirm" title="Logout" message="Are you sure you want to logout?"
             (confirm)="confirmLogout()" (cancel)="cancelLogout()">
         </app-confirm-modal>

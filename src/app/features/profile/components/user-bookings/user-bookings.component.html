@@ -1,0 +1,54 @@
+<div class="bg-white p-6 space-y-6">
+  <h2 class="text-xl font-semibold text-dark">My Bookings</h2>
+
+  @for (booking of bookings; track booking._id) {
+    <div class="border border-gray-200 rounded-lg p-5 space-y-4">
+      <!-- Doctor + Date -->
+      <div class="flex justify-between items-center">
+        <div>
+          <h3 class="text-lg font-semibold text-dark">{{ booking.doctor?.name }}</h3>
+          <p class="text-sm text-gray-500">
+            {{ booking.dateOfService | date:'mediumDate' }} | 
+            {{ booking.timeSlot?.start }} - {{ booking.timeSlot?.end }}
+          </p>
+        </div>
+
+        <!-- Status Badge -->
+        <span
+          class="badge px-4 py-2 text-sm font-medium"
+          [ngClass]="{
+            'badge-success': booking.status === 'confirmed',
+            'badge-warning': booking.status === 'pending',
+            'badge-error': booking.status === 'cancelled'
+          }"
+        >
+          {{ booking.status | titlecase }}
+        </span>
+      </div>
+
+      <!-- Services List -->
+      <div class="space-y-1">
+        <p class="text-sm text-gray-500 font-medium">Services:</p>
+        <ul class="list-disc list-inside space-y-1">
+          @for(service of booking.services; track service._id) {
+            <li class="flex justify-between text-gray-700">
+              <span>{{ service.serviceOption?.optionName }}</span>
+              <span class="font-semibold">{{ service.price | currency:'EGP' }}</span>
+            </li>
+          }
+        </ul>
+      </div>
+
+      <!-- Total Price -->
+      <div class="flex justify-between items-center border-t border-gray-200 pt-2">
+        <span class="font-medium text-dark">Total:</span>
+        <span class="font-semibold text-dark">{{ booking.totalPrice | currency:'EGP' }}</span>
+      </div>
+
+      <!-- Optional User Info -->
+      <div *ngIf="booking.user?.role === 'admin'" class="text-sm text-gray-500 pt-2 border-t border-gray-100">
+        Patient: {{ booking.user?.name }} | Phone: {{ booking.user?.phone }}
+      </div>
+    </div>
+  }
+</div>

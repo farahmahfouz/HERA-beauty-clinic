@@ -15,7 +15,7 @@ export class ButtonComponent {
 
   get buttonClasses(): string {
     const base =
-      'cursor-pointer transition font-semibold mt-6 text-center rounded-full';
+      'cursor-pointer transition font-semibold mt-6 text-center';
 
     const variants = {
       primary:
