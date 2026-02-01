@@ -1,27 +1,37 @@
-<section class="bg-white p-6 space-y-6">
+<form class="bg-white p-6 space-y-6" #form="ngForm" (ngSubmit)="onSubmit(form)">
     <h2 class="text-xl font-semibold text-dark">Profile Information</h2>
 
     <section class="grid grid-cols-1 md:grid-cols-2 gap-6">
         <app-control label="Full Name">
-            <input type="text" placeholder={{user?.name}} />
+            <input type="text" [value]="user?.name || 'Name...'" [(ngModel)]="user.name" name="name" />
+            @if(form.submitted && !user.name) {
+            <small class="text-red-500 text-sm">
+                Name is required
+            </small>
+            }
         </app-control>
 
         <app-control label="Email">
-            <input type="email" placeholder={{user?.email}} disabled />
+            <input type="email" [value]="user?.email || 'Email...'" disabled />
         </app-control>
 
         <app-control label="Username">
-            <input type="text" [placeholder]="user?.username || 'username...'" disabled />
+            <input type="text" [value]="user?.username || 'username...'" disabled />
         </app-control>
 
         <app-control label="Phone">
-            <input type="text" placeholder={{user?.phone}} />
+            <input type="text" [value]="user?.phone || 'Phone...'" name="phone" [(ngModel)]="user.phone" />
         </app-control>
     </section>
 
     <div class="pt-4">
         <button appButton variant="secondary">
-            Save Changes
+            @if(isLoading){
+            <span class="loading loading-spinner loading-sm pe-0.5"></span>
+            <span>Loading...</span>
+            } @else {
+            <span>Save Changes</span>
+            }
         </button>
     </div>
-</section>
+</form>

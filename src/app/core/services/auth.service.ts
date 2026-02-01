@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, tap } from 'rxjs';
+import { BehaviorSubject, Observable, shareReplay, tap } from 'rxjs';
 import { AuthResponse } from '../../features/auth/signup/signup';
 
 @Injectable({
@@ -8,6 +8,8 @@ import { AuthResponse } from '../../features/auth/signup/signup';
 })
 
 export class AuthService {
+  private me$?: Observable<any>;
+
   user$ = new BehaviorSubject<any>(null);
 
   constructor(private http: HttpClient) { }
@@ -23,7 +25,7 @@ export class AuthService {
   }
 
   signup(data: any) {
-    return this.http.post<AuthResponse>('user/signup', data , {
+    return this.http.post<AuthResponse>('user/signup', data, {
       withCredentials: true
     }).pipe(
       tap(res => {
@@ -36,16 +38,48 @@ export class AuthService {
     return this.http.get('user/logout', {
       withCredentials: true
     }).pipe(
-      tap(() => this.user$.next(null))
+      tap(() => {
+        this.user$.next(null)
+        this.me$ = null as any
+      })
     );
   }
 
   getMe() {
-    return this.http.get<any>('user/me', {
+    if (this.user$.value) {
+      return this.user$.asObservable();
+    }
+
+    if (!this.me$) {
+      this.me$ = this.http.get<any>('user/me', {
+        withCredentials: true
+      }).pipe(
+        tap(res => this.user$.next(res.data.user)),
+        shareReplay({ bufferSize: 1, refCount: true })
+      );
+    }
+
+    return this.me$;
+  }
+
+  updateMe(data: any) {
+    return this.http.patch<any>('user/updateMe', data, {
       withCredentials: true
     }).pipe(
-      tap(res => this.user$.next(res.data.user))
+      tap(res => {
+        this.user$.next(res.data.user);
+      })
     );
+  }
+
+  changeMyPassword(data: any) {
+    return this.http.patch<any>('user/changeMyPassword', data, {
+      withCredentials: true
+    }).pipe(
+      tap(res => {
+        this.user$.next(res.data.user);
+      })
+    )
   }
 
   get user() {

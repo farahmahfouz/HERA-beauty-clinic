@@ -1,10 +1,13 @@
 import { Routes } from '@angular/router';
 import { resolveTitle } from './features/services/services.component';
+import { authGuard } from './core/guards/auth.guard';
+import { HomeComponent } from './features/home/home.component';
+import { profileRoutes } from './features/profile/profile.routes';
 
 export const routes: Routes = [
     {
         path: '',
-        loadComponent: () => import('./features/home/home.component').then(m => m.HomeComponent),
+        component: HomeComponent,
         title: 'Home'
     },
     {
@@ -20,6 +23,8 @@ export const routes: Routes = [
     {
         path: 'account',
         loadComponent: () => import('./features/profile/profile.component').then(m => m.ProfileComponent),
-        title: 'Account'
+        title: 'Account',
+        children: profileRoutes,
+        canActivate: [authGuard]
     }
 ];

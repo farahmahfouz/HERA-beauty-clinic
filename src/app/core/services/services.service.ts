@@ -1,11 +1,12 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { map } from 'rxjs';
+import { map, Observable, shareReplay } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ServicesService {
+  private optionsCache: { [slug: string]: Observable<any> } = {};
 
   constructor(private httpClient: HttpClient) { }
 
@@ -13,7 +14,8 @@ export class ServicesService {
     return this.httpClient.get<any>(`service`).pipe(
       map(res => {
         return res.data.services;
-      })
+      }),
+      shareReplay({ bufferSize: 1, refCount: true })
     );
   }
 
@@ -26,11 +28,12 @@ export class ServicesService {
   }
 
   loadSubServiceOptions(slug: string) {
-    return this.httpClient.get<any>(`sub-service/${slug}/services`).pipe(
-      map(res => {
-        return res.data.options
-      })
-    );
+    if (!this.optionsCache[slug]) {
+      this.optionsCache[slug] = this.httpClient.get<any>(`sub-service/${slug}/services`).pipe(
+        map(res => res.data.options),
+        shareReplay({ bufferSize: 1, refCount: true })
+      );
+    }
+    return this.optionsCache[slug];
   }
-
 }

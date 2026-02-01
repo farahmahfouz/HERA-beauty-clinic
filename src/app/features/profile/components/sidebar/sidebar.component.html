@@ -1,34 +1,16 @@
 <aside class="bg-white p-5 space-y-3 h-fit">
-  <button
-    class="w-full text-left font-medium pl-3 py-2"
-    [ngClass]="{
-      'text-dark border-l-4 border-orange-500': activeTab === 'profile',
-      'text-gray-500 pl-4 hover:text-dark border-0': activeTab !== 'profile'
-    }"
-    (click)="setTab('profile')"
-  >
+  <button class="w-full text-left font-medium pl-3 py-2 cursor-pointer" routerLinkActive="text-dark border-l-4 border-orange-500"
+     routerLink="info">
     Profile Info
   </button>
 
-  <button
-    class="w-full text-left font-medium pl-4 py-2"
-    [ngClass]="{
-      'text-dark border-l-4 border-orange-500': activeTab === 'bookings',
-      'text-gray-500 hover:text-dark border-0': activeTab !== 'bookings'
-    }"
-    (click)="setTab('bookings')"
-  >
+  <button class="w-full text-left font-medium pl-4 py-2 cursor-pointer" routerLink="bookings"
+    routerLinkActive="text-dark border-l-4 border-orange-500">
     My Bookings
   </button>
 
-  <button
-    class="w-full text-left font-medium pl-4 py-2"
-    [ngClass]="{
-      'text-dark border-l-4 border-orange-500': activeTab === 'password',
-      'text-gray-500 hover:text-dark border-0': activeTab !== 'password'
-    }"
-    (click)="setTab('password')"
-  >
+  <button class="w-full text-left font-medium pl-4 py-2 cursor-pointer" routerLinkActive="text-dark border-l-4 border-orange-500"
+    routerLink="password">
     Change Password
   </button>
 </aside>

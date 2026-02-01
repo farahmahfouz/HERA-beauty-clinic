@@ -1,18 +1,13 @@
-import { NgClass } from '@angular/common';
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component } from '@angular/core';
+import { RouterLink, RouterLinkActive } from '@angular/router';
 
 @Component({
   selector: 'app-sidebar',
   standalone: true,
-  imports: [NgClass],
+  imports: [RouterLink, RouterLinkActive],
   templateUrl: './sidebar.component.html',
   styleUrl: './sidebar.component.css'
 })
 export class SidebarComponent {
-  @Input() activeTab!: string;
-  @Output() tabChange = new EventEmitter<string>();
 
-  setTab(tab: string) {
-    this.tabChange.emit(tab);
-  }
 }

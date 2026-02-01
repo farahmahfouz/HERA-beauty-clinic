@@ -10,3 +10,14 @@
 .control textarea:focus {
   border-color: black;
 }
+
+.control input:disabled {
+  background-color: #f3f4f6;
+  color: #9ca3af;
+  cursor: not-allowed;
+}
+
+.control input:disabled + label,
+.control input:disabled {
+  opacity: 0.7;
+}

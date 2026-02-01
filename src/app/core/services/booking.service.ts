@@ -6,7 +6,6 @@ import { map } from 'rxjs';
   providedIn: 'root'
 })
 export class BookingService {
-
   constructor(private httpClient: HttpClient) { }
 
   createBooking(data: any){
@@ -18,7 +17,6 @@ export class BookingService {
   getMyBookings(){
     return this.httpClient.get<any>('booking/my-bookings').pipe(
       map(res => {
-        console.log(res);
         return res.data.bookings;
       })
     )
