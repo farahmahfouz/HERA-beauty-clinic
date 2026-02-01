@@ -8,13 +8,15 @@ import { map } from 'rxjs';
 export class BookingService {
   constructor(private httpClient: HttpClient) { }
 
-  createBooking(data: any){
+  createBooking(data: any) {
     return this.httpClient.post<any>('booking', data).pipe(
-      map(res => console.log(res))
+      map(res => {
+        return res.data.booking;
+      })
     )
   }
 
-  getMyBookings(){
+  getMyBookings() {
     return this.httpClient.get<any>('booking/my-bookings').pipe(
       map(res => {
         return res.data.bookings;
