@@ -25,7 +25,7 @@ export class BookingComponent implements OnInit {
 
   scheduales: any[] = [];
 
-  selectedService: any = null;
+  selectedServices: any[] = [];
   selectedSchedule: any = null;
   selectedDay: any = null;
   selectedSlot: any = null;
@@ -56,13 +56,13 @@ export class BookingComponent implements OnInit {
     this.destroyRef.onDestroy(() => sub.unsubscribe());
   }
 
-  open(service: any) {
-    this.selectedService = {
-      optionName: service.optionName,
-      price: service.price,
-      serviceOption: service._id
-    };
-
+  open(services: any[]) {
+    console.log('SERVICES RECEIVED', services);
+    this.selectedServices = services.map(s => ({
+      optionName: s.optionName,
+      price: s.price,
+      serviceOption: s._id
+    }));
     this.modal.open();
   }
 
@@ -100,21 +100,39 @@ export class BookingComponent implements OnInit {
     return dayNames[new Date(dateStr).getDay()];
   }
 
+  get totalPrice(): number {
+    return this.selectedServices.reduce(
+      (sum, service) => sum + service.price,
+      0
+    );
+  }
 
   onSubmit(form: any) {
-    if (form.invalid || !this.selectedDay || !this.selectedSlot) return;
+    const errors = [];
+
+    if (form.invalid) errors.push('doctor');
+    if (!this.selectedDay) errors.push('date');
+    if (!this.selectedSlot) errors.push('time');
+
+    if (errors.length) {
+      this.toast.showError(
+        `Please select: ${errors.join(', ')}`
+      );
+      return;
+    }
 
     const bookingPayload = {
       doctor: this.selectedSchedule.doctor._id,
 
-      services: [
-        {
-          serviceOption: this.selectedService.serviceOption,
-          price: this.selectedService.price
-        }
-      ],
+      services: this.selectedServices.map(s => ({
+        serviceOption: s.serviceOption,
+        price: s.price
+      })),
 
-      totalPrice: this.selectedService.price,
+      totalPrice: this.selectedServices.reduce(
+        (sum, s) => sum + s.price,
+        0
+      ),
 
       dateOfService: this.selectedDate,
 
@@ -127,17 +145,16 @@ export class BookingComponent implements OnInit {
     this.isLoading = true;
 
     this.bookingService.createBooking(bookingPayload).subscribe({
-      next: (res) => {
-        console.log('BOOKING SUCCESS', res);
+      next: () => {
         this.isLoading = false;
-        this.toast.showSuccess('Booking Done ✓');
         this.modal.close();
+        this.toast.showSuccess('Booking Done');
+        form.resetForm()
       },
       error: (err) => {
-        console.error('BOOKING ERROR', err.error.message);
         this.isLoading = false;
-        this.toast.showError(err.error.message)
-        this.modal.close()
+        this.modal.close();
+        this.toast.showError(err.error.message || 'Booking failed');
       }
     })
   }

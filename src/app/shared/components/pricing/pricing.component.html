@@ -26,21 +26,33 @@
             </div>
 
             <!-- RIGHT IMAGE -->
-            <div class="relative w-35 h-35 ">
+            <div class="relative w-35 h-35">
                 <img src="/images/laser-placeholder.jpg" alt="Laser Service"
                     class="w-full h-full object-cover rounded-xl" />
 
-                <!-- PLUS BUTTON -->
-                <button
-                    (click)="openBookingModal(option)"
-                    class="absolute -top-3 -right-3 w-9 h-9 rounded-full border border-brown text-brown flex items-center justify-center bg-white hover:bg-brown hover:text-white transition-colors cursor-pointer">
-                    +
+                <!-- SELECT BUTTON -->
+                <button (click)="toggleService(option)" class="absolute -top-3 -right-3 w-9 h-9 text-lg font-bold
+                   flex items-center justify-center transition-colors cursor-pointer" [ngClass]="{
+              'bg-white text-brown border-brown hover:bg-brown hover:text-brown-300':
+                !isSelected(option),
+
+              'bg-brown text-brown border-brown':
+                isSelected(option)
+            }">
+                    {{ isSelected(option) ? '✓' : '+' }}
                 </button>
             </div>
 
         </div>
         }
 
+    </div>
+
+    <!-- BOOK BUTTON -->
+    <div class="text-center mt-10" *ngIf="selectedServices.length">
+        <button appButton variant="secondary" (click)="openBookingModal()">
+            Book {{ selectedServices.length }} Service(s)
+        </button>
     </div>
 
     <!-- Booking Modal -->

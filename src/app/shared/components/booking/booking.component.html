@@ -66,25 +66,29 @@
     }
 
     <!-- Service -->
-    @if (selectedService) {
+    @if (selectedServices.length > 0) {
     <div class="mt-6">
-      <p class="font-medium mb-2">Service</p>
+      <p class="font-medium mb-2">Services</p>
 
-      <label class="flex items-center gap-3">
-        <input type="checkbox" name="service" [ngModel]="selectedService" checked disabled />
-        <span>
-          {{ selectedService.optionName }}
-          <span class="text-sm text-gray-400">
-            ({{ selectedService.price }} EGP)
+      <div class="space-y-2">
+        @for (service of selectedServices; track service.serviceOption) {
+        <div class="flex justify-between text-sm">
+          <span>
+            {{ service.optionName }}
           </span>
-        </span>
-      </label>
+
+          <span class="text-gray-400">
+            {{ service.price }} EGP
+          </span>
+        </div>
+        }
+      </div>
     </div>
 
-    <div class="flex justify-between items-center mt-4">
+    <div class="flex justify-between items-center mt-4 border-t pt-3">
       <span class="font-semibold">Total</span>
       <span class="text-lg font-bold">
-        {{ selectedService.price }} EGP
+        {{ totalPrice }} EGP
       </span>
     </div>
     }

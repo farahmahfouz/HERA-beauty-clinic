@@ -1,7 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { HeaderComponent } from "./components/header/header.component";
 import { FaqsComponent } from '../../../shared/components/faqs/faqs.component';
-import { PricingComponent } from "./components/pricing/pricing.component";
+import { PricingComponent } from "../../../shared/components/pricing/pricing.component";
 import { ReviewComponent } from "../../../shared/components/review/review.component";
 import { SectionContainerComponent } from '../../../shared/components/section-container/section-container.component';
 import { BenefitsComponent } from "../../../shared/components/benefits/benefits.component";

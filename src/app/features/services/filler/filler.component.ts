@@ -5,7 +5,7 @@ import { IntroComponent } from "./components/intro/intro.component";
 import { FaqsComponent } from "../../../shared/components/faqs/faqs.component";
 import { SectionContainerComponent } from "../../../shared/components/section-container/section-container.component";
 import { BenefitsComponent } from "../../../shared/components/benefits/benefits.component";
-import { PricingComponent } from "./components/pricing/pricing.component";
+import { PricingComponent } from "../../../shared/components/pricing/pricing.component";
 import { MiniNavbarComponent } from '../../../shared/components/mini-navbar/mini-navbar.component';
 
 
