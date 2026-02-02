@@ -1,0 +1,16 @@
+<section class="relative w-full mx-auto mt-20">
+  <div class="grid grid-cols-6 overflow-hidden group">
+    <img *ngFor="let img of images" [src]="img"
+      class="h-96 w-full object-cover transition-transform duration-700 group-hover:scale-105" />
+  </div>
+
+  <div class="absolute inset-0  bg-linear-to-r from-white/60 via-white/30 to-whhite/60 flex flex-col items-center justify-center">
+    <h1 class="text-3xl md:text-5xl font-serif text-dark leading-tight pt-4 md:pt-0 text-center md:text-left">
+      Hydration &<br /> Restoration
+    </h1>
+    <div class="flex justify-center md:justify-start gap-4 pt-4">
+      <button appButton variant="fourthy">PRICING</button>
+      <button appButton variant="tertiary">BOOK NOW</button>
+    </div>
+  </div>
+</section>
