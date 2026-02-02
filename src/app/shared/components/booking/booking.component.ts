@@ -57,7 +57,6 @@ export class BookingComponent implements OnInit {
   }
 
   open(services: any[]) {
-    console.log('SERVICES RECEIVED', services);
     this.selectedServices = services.map(s => ({
       optionName: s.optionName,
       price: s.price,

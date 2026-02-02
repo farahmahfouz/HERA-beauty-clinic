@@ -6,15 +6,16 @@ import { Component } from "@angular/core";
 import { switchMap } from "rxjs";
 import { NgIf } from "@angular/common";
 import { SkinCareComponent } from "./skin-care/skin-care.component";
+import { HairTreatmentComponent } from "./hair-treatment/hair-treatment.component";
 
 @Component({
   selector: 'app-services',
   standalone: true,
-  imports: [LaserHairRemovalComponent, FillerComponent, NgIf, SkinCareComponent],
+  imports: [LaserHairRemovalComponent, FillerComponent, NgIf, SkinCareComponent, HairTreatmentComponent],
   templateUrl: './services.component.html',
 })
 export class ServicesComponent {
-  type: 'laser' | 'filler' | 'classic-treatment' | 'default' = 'default';
+  type: 'laser' | 'filler' | 'classic-treatment' | 'oil-therapy' | 'default' = 'default';
   options: any[] = [];
 
   constructor(
@@ -34,6 +35,8 @@ export class ServicesComponent {
             this.type = 'filler';
           } else if (slug === 'classic-treatment') {
             this.type = 'classic-treatment';
+          } else if (slug === 'oil-therapy') {
+            this.type = 'oil-therapy';
           } else {
             this.type = 'default';
           }

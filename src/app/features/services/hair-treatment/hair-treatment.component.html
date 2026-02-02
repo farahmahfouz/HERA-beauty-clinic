@@ -1,0 +1,18 @@
+<app-header/>
+<app-mini-navbar [items]="navItems"/>
+
+<app-section-container
+  id="how-it-works"
+  title="How it Works"
+  [paragraphs]="[
+    'Hair health is influenced by genetics, lifestyle, and daily hair care habits. Over time, factors such as heat styling, colouring, stress, and environmental exposure can lead to dryness, damage, and weakened hair.',
+    'Our experienced hair specialists begin with a detailed consultation to assess your hair and scalp condition. Based on your individual needs, we create a personalised treatment plan designed to nourish, repair, and restore your hair’s strength, shine, and overall health.'
+  ]"
+  image="/images/hair.jpg"
+/>
+
+
+<app-benefits [benefits]="benefits" title="Hair Treatment Benefits"/>
+<app-pricing [options]="options"/>
+<app-review/>
+<app-faqs [faqs]="faqs"/>

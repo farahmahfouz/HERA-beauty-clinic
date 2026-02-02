@@ -5,11 +5,12 @@ import { FaqsComponent } from "../../../shared/components/faqs/faqs.component";
 import { ReviewComponent } from '../../../shared/components/review/review.component';
 import { PricingComponent } from '../../../shared/components/pricing/pricing.component';
 import { IntroComponent } from "../skin-care/components/intro/intro.component";
+import { BenefitsComponent } from '../../../shared/components/benefits/benefits.component';
 
 @Component({
   selector: 'app-skin-care',
   standalone: true,
-  imports: [HeaderComponent, MiniNavbarComponent, FaqsComponent, ReviewComponent, PricingComponent, IntroComponent],
+  imports: [HeaderComponent, MiniNavbarComponent, FaqsComponent, ReviewComponent, PricingComponent, IntroComponent, BenefitsComponent],
   templateUrl: './skin-care.component.html',
   styleUrl: './skin-care.component.css'
 })
@@ -47,6 +48,24 @@ export class SkinCareComponent {
         'The cost varies depending on the treatment type and your individual skin needs. Exact pricing will be discussed during your consultation.'
     }
   ];
+
+  benefits = [
+  {
+    title: "Skin Rejuvenation",
+    description: "Hydration of the skin can be impacted naturally by ageing, lifestyle and genetics.",
+    img: '/images/safe.webp'
+  },
+  {
+    title: "Replenish Hydration",
+    description: "Discuss suitable options to replenish visible signs of hydration of the skin.",
+    img: '/images/proven.webp'
+  },
+  {
+    title: "Skin Treatments",
+    description: "Through consultation we take time to understand your aesthetic goals.",
+    img: '/images/cost.webp'
+  }
+];
 
 
 }

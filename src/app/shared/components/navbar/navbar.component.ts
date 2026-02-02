@@ -42,6 +42,7 @@ export class NavbarComponent implements OnInit {
   @HostListener('window:scroll')
   onScroll() {
     this.isScrolled = window.scrollY > 50;
+    this.isServicesOpen = false;
   }
 
   toggleMenu() {

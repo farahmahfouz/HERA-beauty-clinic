@@ -6,8 +6,6 @@ import { ReviewComponent } from "../../../shared/components/review/review.compon
 import { SectionContainerComponent } from '../../../shared/components/section-container/section-container.component';
 import { BenefitsComponent } from "../../../shared/components/benefits/benefits.component";
 import { MiniNavbarComponent } from "../../../shared/components/mini-navbar/mini-navbar.component";
-import { ServicesService } from '../../../core/services/services.service';
-import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-laser-hair-removal',
