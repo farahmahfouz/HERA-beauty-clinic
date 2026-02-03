@@ -6,7 +6,7 @@
 <app-benefits [benefits]="benefits" title="Benefits of Cosmetic Aesthetics"/>
 <app-pricing [options]="options"/>
 
-
-<app-review />
-
+@if (selectedOption) {
+  <app-review [serviceOptionId]="selectedOption._id"/>
+}
 <app-faqs [faqs]="faqs" />

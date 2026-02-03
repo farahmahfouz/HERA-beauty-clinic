@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
 import { HeaderComponent } from "./components/header/header.component";
 import { FaqsComponent } from '../../../shared/components/faqs/faqs.component';
 import { PricingComponent } from "../../../shared/components/pricing/pricing.component";
@@ -14,9 +14,17 @@ import { MiniNavbarComponent } from "../../../shared/components/mini-navbar/mini
   templateUrl: './laser-hair-removal.component.html',
   styleUrl: './laser-hair-removal.component.css'
 })
-export class LaserHairRemovalComponent {
+export class LaserHairRemovalComponent implements OnChanges {
   @Input() options: any[] = [];
-  
+
+  selectedOption: { _id: string } | null = null;
+
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes['options'] && this.options?.length) {
+      this.selectedOption = this.options[0];
+    }
+  }
+
   faqs = [
     {
       question: 'What is the Lifetime Appearance Promise?',

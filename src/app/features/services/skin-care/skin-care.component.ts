@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
 import { HeaderComponent } from "./components/header/header.component";
 import { MiniNavbarComponent } from "../../../shared/components/mini-navbar/mini-navbar.component";
 import { FaqsComponent } from "../../../shared/components/faqs/faqs.component";
@@ -14,8 +14,16 @@ import { BenefitsComponent } from '../../../shared/components/benefits/benefits.
   templateUrl: './skin-care.component.html',
   styleUrl: './skin-care.component.css'
 })
-export class SkinCareComponent {
+export class SkinCareComponent implements OnChanges{
   @Input() options: any[] = [];
+
+  selectedOption: { _id: string } | null = null;
+
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes['options'] && this.options?.length) {
+      this.selectedOption = this.options[0];
+    }
+  }
 
   navItems = [
     { label: 'about', sectionId: 'about' },

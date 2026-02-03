@@ -10,10 +10,18 @@ export class ReviewsService {
 
   constructor(private httpClient: HttpClient) { }
 
-  getAllReviews(){
+  getAllReviews() {
     return this.httpClient.get<any>(`review`).pipe(
-      map(res => { 
+      map(res => {
         return res?.data?.reviews as Review[]
+      })
+    )
+  }
+
+  createReview(data: any) {
+    return this.httpClient.post(`review`, data).pipe(
+      map(res => {
+        console.log(res)
       })
     )
   }

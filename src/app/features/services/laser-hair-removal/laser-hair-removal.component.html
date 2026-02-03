@@ -23,5 +23,7 @@
 
 <!-- Pricing -->
 <app-pricing [options]="options"/>
-<app-review/>
+@if (selectedOption) {
+  <app-review [serviceOptionId]="selectedOption._id"/>
+}
 <app-faqs [faqs]="faqs"/>

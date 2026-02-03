@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 
 @Component({
   selector: 'app-ratings',
@@ -9,7 +9,13 @@ import { Component, Input } from '@angular/core';
   styleUrl: './ratings.component.css'
 })
 export class RatingsComponent {
-  @Input() value: number = 0;
+  @Input() value = 0;
+  @Output() valueChange = new EventEmitter<number>();
 
   stars = [1, 2, 3, 4, 5];
+
+  setRating(star: number) {
+    this.value = star;
+    this.valueChange.emit(star);
+  }
 }

@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
 import { HeaderComponent } from "./components/header/header.component";
 import { ReviewComponent } from "../../../shared/components/review/review.component";
 import { IntroComponent } from "./components/intro/intro.component";
@@ -16,8 +16,16 @@ import { MiniNavbarComponent } from '../../../shared/components/mini-navbar/mini
   templateUrl: './filler.component.html',
   styleUrl: './filler.component.css'
 })
-export class FillerComponent {
+export class FillerComponent implements OnChanges{
   @Input() options: any[] = [];
+
+  selectedOption: { _id: string } | null = null;
+
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes['options'] && this.options?.length) {
+      this.selectedOption = this.options[0];
+    }
+  }
 
   fillerFaqs = [
     {

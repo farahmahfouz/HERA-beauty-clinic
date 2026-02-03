@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
 import { BenefitsComponent } from '../../../shared/components/benefits/benefits.component';
 import { ReviewComponent } from "../../../shared/components/review/review.component";
 import { FaqsComponent } from '../../../shared/components/faqs/faqs.component';
@@ -14,8 +14,17 @@ import { PricingComponent } from '../../../shared/components/pricing/pricing.com
   templateUrl: './hair-treatment.component.html',
   styleUrl: './hair-treatment.component.css'
 })
-export class HairTreatmentComponent {
+export class HairTreatmentComponent implements OnChanges{
   @Input() options: any[] = [];
+
+  selectedOption: { _id: string } | null = null;
+
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes['options'] && this.options?.length) {
+      this.selectedOption = this.options[0];
+    }
+  }
+
   faqs = [
     {
       question: 'What is a hair treatment?',
@@ -73,7 +82,7 @@ provided by your specialist to prolong results and maintain healthy hair.`
     }
   ];
 
-    navItems = [
+  navItems = [
     { label: 'about', sectionId: 'about' },
     { label: 'benefits', sectionId: 'benefits' },
     { label: 'how it works', sectionId: 'how-it-works' },
@@ -83,31 +92,31 @@ provided by your specialist to prolong results and maintain healthy hair.`
   ];
 
   benefits = [
-  {
-    title: 'Stronger, Healthier Hair',
-    description: 'Hair treatments strengthen the hair shaft, reduce breakage and improve overall hair resilience from root to tip.',
-    img: '/images/safe.webp'
-  },
-  {
-    title: 'Deep Nourishment',
-    description: 'Professional formulas deliver essential nutrients, vitamins and hydration directly to the hair and scalp for long-lasting nourishment.',
-    img: '/images/proven.webp'
-  },
-  {
-    title: 'Reduced Hair Fall',
-    description: 'Targeted scalp and hair treatments help minimise hair shedding by supporting healthier follicles and scalp balance.',
-    img: '/images/ingrowns.webp'
-  },
-  {
-    title: 'Improved Shine & Texture',
-    description: 'Hair treatments smooth the hair cuticle, enhancing natural shine, softness and manageability.',
-    img: '/images/cost.webp'
-  },
-  {
-    title: 'Customised Solutions',
-    description: 'Each treatment is tailored to your unique hair concerns, ensuring personalised care and visible results.',
-    img: '/images/time.webp'
-  }
-];
+    {
+      title: 'Stronger, Healthier Hair',
+      description: 'Hair treatments strengthen the hair shaft, reduce breakage and improve overall hair resilience from root to tip.',
+      img: '/images/safe.webp'
+    },
+    {
+      title: 'Deep Nourishment',
+      description: 'Professional formulas deliver essential nutrients, vitamins and hydration directly to the hair and scalp for long-lasting nourishment.',
+      img: '/images/proven.webp'
+    },
+    {
+      title: 'Reduced Hair Fall',
+      description: 'Targeted scalp and hair treatments help minimise hair shedding by supporting healthier follicles and scalp balance.',
+      img: '/images/ingrowns.webp'
+    },
+    {
+      title: 'Improved Shine & Texture',
+      description: 'Hair treatments smooth the hair cuticle, enhancing natural shine, softness and manageability.',
+      img: '/images/cost.webp'
+    },
+    {
+      title: 'Customised Solutions',
+      description: 'Each treatment is tailored to your unique hair concerns, ensuring personalised care and visible results.',
+      img: '/images/time.webp'
+    }
+  ];
 
 }

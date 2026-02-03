@@ -1,8 +1,13 @@
 <div class="flex gap-1">
-    <ng-container *ngFor="let star of stars">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="w-5 h-5"
-            [ngClass]="star <= value ? 'text-yellow-400' : 'text-gray-300'" fill="currentColor">
-            <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z" />
-        </svg>
-    </ng-container>
+  <ng-container *ngFor="let star of stars">
+    <svg
+      (click)="setRating(star)"
+      class="w-6 h-6 cursor-pointer transition"
+      [ngClass]="star <= value ? 'text-yellow-400' : 'text-gray-300'"
+      fill="currentColor"
+      viewBox="0 0 24 24">
+      <path
+        d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z" />
+    </svg>
+  </ng-container>
 </div>
