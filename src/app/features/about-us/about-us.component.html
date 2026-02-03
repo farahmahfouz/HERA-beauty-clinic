@@ -27,7 +27,6 @@
 
         @for (doctor of doctors; track doctor.id; let i = $index) {
         <div class="grid grid-cols-1 md:grid-cols-2 items-center md:pt-10" [class.md:grid-flow-col-dense]="i % 2 === 1">
-
             <div class="w-full relative flex items-center justify-center pb-5 md:pb-0"
                 [class.md:col-start-2]="i % 2 === 1">
                 <img [ngSrc]="doctor.image" [alt]="doctor.name"

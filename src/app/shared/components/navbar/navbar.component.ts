@@ -18,8 +18,10 @@ export class NavbarComponent implements OnInit {
   isMenuOpen = false;
   isScrolled = false;
   isServicesOpen = false;
+  isUserMenuOpen = false;
   isLoggedIn = false;
   showLogoutConfirm = false;
+  userInitial: string = '?';
 
   constructor(public auth: AuthService) { }
 
@@ -33,6 +35,12 @@ export class NavbarComponent implements OnInit {
   ngOnInit() {
     this.auth.user$.subscribe(user => {
       this.isLoggedIn = !!user;
+
+      if (user && user.name) {
+        this.userInitial = user.name.charAt(0).toUpperCase();
+      } else {
+        this.userInitial = '?';
+      }
     });
   }
 
@@ -50,6 +58,13 @@ export class NavbarComponent implements OnInit {
     this.isMenuOpen = !this.isMenuOpen;
   }
 
+  toggleUserMenu() {
+    this.isUserMenuOpen = !this.isUserMenuOpen;
+  }
+
+  closeUserMenu() {
+    this.isUserMenuOpen = false;
+  }
 
   openSignupModal() {
     this.openSignup.emit();
@@ -75,6 +90,14 @@ export class NavbarComponent implements OnInit {
 
   cancelLogout() {
     this.showLogoutConfirm = false;
+  }
+
+  @HostListener('document:click', ['$event'])
+  onClickOutside(event: MouseEvent) {
+    const target = event.target as HTMLElement;
+    if (!target.closest('button') && !target.closest('.relative')) {
+      this.isUserMenuOpen = false;
+    }
   }
 
 }

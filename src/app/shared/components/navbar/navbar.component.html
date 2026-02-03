@@ -2,7 +2,7 @@
     <div class="flex items-center h-16 px-4 lg:px-24 container mx-auto">
         <!-- Logo -->
         <a routerLink="/">
-            <img src="/images/logo.png" alt="logo" class="w-16 h-16 object-contain" />
+            <img src="/images/logo.png" alt="logo" class="w-16 h-16 object-contain focus:none" />
         </a>
 
         <!-- Desktop Links -->
@@ -29,25 +29,101 @@
         <app-service-menu [isOpen]="isServicesOpen" (close)="isServicesOpen = false"></app-service-menu>
 
         <!-- Desktop Auth -->
-        <div class="hidden md:flex gap-4">
-            <p *ngIf="!auth.isLoggedIn" class="text-dark cursor-pointer hover:text-gray-800" (click)="openLoginModal()">
-                Login
-            </p>
-            <p *ngIf="!auth.isLoggedIn" class="text-dark cursor-pointer hover:text-gray-800"
-                (click)="openSignupModal()">
-                Signup
-            </p>
-            <p *ngIf="auth.isLoggedIn" class="text-dark cursor-pointer hover:text-gray-800"
-                (click)="openLogoutConfirm()">
-                Logout
-            </p>
-            <a routerLink="/account" class="text-dark cursor-pointer hover:text-gray-800" *ngIf="auth.isLoggedIn">
-                Account
-            </a>
+        <div class="relative hidden md:flex items-center">
+            <!-- User Icon Button -->
+            <button (click)="toggleUserMenu()" class="w-10 h-10 rounded-full bg-cream text-dark border cursor-pointer
+         flex items-center justify-center font-semibold text-lg
+         hover:opacity-90 transition">
+                <!-- Logged In -->
+                <span *ngIf="auth.isLoggedIn">
+                    {{ userInitial }}
+                </span>
+
+                <!-- Not Logged In -->
+                <svg *ngIf="!auth.isLoggedIn" xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none"
+                    viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round"
+                        d="M5.121 17.804A9 9 0 1118.879 17.8M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+                </svg>
+            </button>
+
+
+            <!-- Dropdown Menu -->
+            <div *ngIf="isUserMenuOpen" class="absolute right-0 top-12 w-60 bg-cream shadow-xs
+           border border-gray-100 py-4 z-50">
+                <!-- NOT LOGGED IN -->
+                <ng-container *ngIf="!auth.isLoggedIn">
+                    <button (click)="openLoginModal(); closeUserMenu()"
+                        class="flex items-center gap-3 w-full px-4 py-2 text-md text-dark hover:bg-orange-100/10">
+
+                        <!-- Login Icon -->
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round"
+                                d="M15 3h4a2 2 0 012 2v14a2 2 0 01-2 2h-4M10 17l5-5-5-5M15 12H3" />
+                        </svg>
+
+                        Login
+                    </button>
+
+                    <button (click)="openSignupModal(); closeUserMenu()"
+                        class="flex items-center gap-3 w-full px-4 py-2 text-md text-dark hover:bg-orange-100/10">
+
+                        <!-- Signup Icon -->
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round"
+                                d="M18 9v3m0 0v3m0-3h3m-3 0h-3M4 6h16M4 10h16M4 14h10" />
+                        </svg>
+
+                        Signup
+                    </button>
+
+                </ng-container>
+
+                <!-- LOGGED IN -->
+                <ng-container *ngIf="auth.isLoggedIn">
+                    <a routerLink="/account/info" (click)="closeUserMenu()"
+                        class="flex gap-3 items-center px-4 py-2 text-md text-dark hover:bg-orange-100/10">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round"
+                                d="M5.121 17.804A9 9 0 1118.879 17.8M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+                        </svg>
+                        Profile
+                    </a>
+                    <a routerLink="/account/bookings" (click)="closeUserMenu()"
+                        class="flex gap-3 items-center px-4 py-2 text-md text-dark hover:bg-orange-100/10">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round"
+                                d="M8 7V3m8 4V3M3 11h18M5 19h14a2 2 0 002-2v-8H3v8a2 2 0 002 2z" />
+                        </svg>
+                        Bookings
+                    </a>
+                    <a routerLink="/account/password" (click)="closeUserMenu()"
+                        class=" px-4 py-2 text-md text-dark hover:bg-orange-100/10 flex gap-3 items-center">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round"
+                                d="M12 11c1.657 0 3-1.343 3-3S13.657 5 12 5 9 6.343 9 8s1.343 3 3 3z" />
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M17 16l4 4m0 0l-4-4m4 4H7" />
+                        </svg>
+                        Change Password
+                    </a>
+
+                    <button (click)="openLogoutConfirm(); closeUserMenu()"
+                        class="w-full text-left px-4 py-2 text-md text-red-700 hover:bg-orange-100/10 flex gap-3 items-center">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round"
+                                d="M17 16l4-4m0 0l-4-4m4 4H7M3 12a9 9 0 0118 0" />
+                        </svg>
+                        Logout
+                    </button>
+                </ng-container>
+            </div>
+
+            <!-- Confirm Logout Modal -->
             <app-confirm-modal [isOpen]="showLogoutConfirm" title="Logout" message="Are you sure you want to logout?"
                 (confirm)="confirmLogout()" (cancel)="cancelLogout()">
             </app-confirm-modal>
         </div>
+
 
         <!-- Mobile Button -->
         <button class="ml-auto md:hidden text-dark text-2xl" (click)="toggleMenu()">
@@ -91,7 +167,8 @@
         <p *ngIf="auth.isLoggedIn" class="text-dark cursor-pointer hover:text-gray-800" (click)="openLogoutConfirm()">
             Logout
         </p>
-        <a routerLink="/account" class="text-dark cursor-pointer hover:text-gray-800" *ngIf="auth.isLoggedIn">
+        <a routerLink="/account" class="text-dark cursor-pointer hover:text-gray-800" *ngIf="auth.isLoggedIn"
+            (click)="toggleMenu()">
             Account
         </a>
         <app-confirm-modal [isOpen]="showLogoutConfirm" title="Logout" message="Are you sure you want to logout?"
