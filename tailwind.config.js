@@ -1,8 +1,7 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
-  content: [
-    "./src/**/*.{html,ts}"
-  ],
+  content: ["./src/**/*.{html,ts}"],
+  safelist: ["max-w-[1200px]", "max-w-[1376px]"],
   theme: {
     extend: {
       colors: {
@@ -11,7 +10,6 @@ module.exports = {
         "pink-light": "#f3dfe3",
         "pink-dark": "#831843",
         "light-gray": "#F0F0F0",
-        mint: "#ECF4E8",
       },
     },
   },
