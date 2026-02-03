@@ -1,3 +1,4 @@
+import { NgOptimizedImage } from '@angular/common';
 import { Component, Input } from '@angular/core';
 
 interface Benefits {
@@ -9,7 +10,7 @@ interface Benefits {
 @Component({
   selector: 'app-benefits',
   standalone: true,
-  imports: [],
+  imports: [NgOptimizedImage],
   templateUrl: './benefits.component.html',
   styleUrl: './benefits.component.css'
 })

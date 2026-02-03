@@ -4,7 +4,8 @@
         @for(benefit of benefits; track benefit.title){
             <div>
                 <div class="flex gap-4">
-                    <img [src]="benefit.img" [alt]="benefit.title" class="h-18 w-18" />
+                    <img [ngSrc]="benefit.img" [alt]="benefit.title" class="h-18 w-18" loading="lazy"  width="400"
+    height="600"/>
                     <div class="flex flex-col gap-2">
                         <h3 class="text-xl font-semibold">{{ benefit.title }}</h3>
                         <p class="benefit-description">{{ benefit.description }}</p>

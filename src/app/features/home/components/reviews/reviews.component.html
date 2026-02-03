@@ -1,49 +1,42 @@
 <section class="py-20 overflow-hidden">
-    <div class="layout-container-lg">
-      <div class="flex flex-col lg:flex-row bg-cream shadow-sm rounded-none">
-        <div class="lg:w-3/5">
-          <img src="/images/review.webp" alt="reviews" class="w-full h-full object-cover" />
-        </div>
+  <div class="layout-container-lg">
+    <div class="flex flex-col lg:flex-row bg-cream shadow-sm rounded-none">
+      <div class="lg:w-3/5">
+        <img ngSrc="/images/review.webp" alt="reviews" class="w-full h-full object-cover" loading="lazy" width="400"
+          height="600" />
+      </div>
 
-        <div class="card-body items-center lg:w-2/5">
-  
-          <img src="/images/logo.png" class="w-28 h-28 object-contain" />
-  
-          <!-- SLIDER -->
-          <div class="relative w-full overflow-hidden pt-8">
-            <div
-              class="flex transition-transform duration-700 ease-in-out"
-              [style.transform]="'translateX(-' + activeIndex * 100 + '%)'"
-            >
-              <div
-                *ngFor="let review of reviews"
-                class="min-w-full flex flex-col items-center space-y-4 px-6"
-              >
-                <h2 class="text-2xl text-center font-semibold">
-                  {{ review.user.name }}
-                </h2>
-  
-                <app-ratings [value]="review.rating" />
-  
-                <p class="text-lg text-center max-w-xl">
-                  {{ review.review }}
-                </p>
-              </div>
+      <div class="card-body items-center lg:w-2/5">
+
+        <img ngSrc="/images/logo.png" class="w-28 h-28 object-contain" loading="lazy" width="400" height="600" alt="logo"/>
+
+        <!-- SLIDER -->
+        <div class="relative w-full overflow-hidden pt-8">
+          <div class="flex transition-transform duration-700 ease-in-out"
+            [style.transform]="'translateX(-' + activeIndex * 100 + '%)'">
+            <div *ngFor="let review of reviews" class="min-w-full flex flex-col items-center space-y-4 px-6">
+              <h4 class="text-2xl text-center font-semibold">
+                {{ review.user.name }}
+              </h4>
+
+              <app-ratings [value]="review.rating" />
+
+              <h5 class="text-lg text-center max-w-xl">
+                {{ review.review }}
+              </h5>
             </div>
           </div>
-  
-          <div class="flex gap-3 mt-auto">
-            <button
-              *ngFor="let r of reviews; let i = index"
-              (click)="goTo(i)"
-              class="w-3 h-3 rounded-full transition-all mt-auto"
-              [ngClass]="
-                activeIndex === i ? 'bg-dark scale-110' : 'bg-dark/30'
-              "
-            ></button>
-          </div>
-  
         </div>
+
+        <div class="flex gap-3 mt-auto">
+          <button *ngFor="let r of reviews; let i = index" (click)="goTo(i)"
+            class="w-3 h-3 rounded-full transition-all mt-auto" [ngClass]="
+                activeIndex === i ? 'bg-dark scale-110' : 'bg-dark/30'
+              " [attr.aria-label]="'Go to review ' + (i + 1)" [attr.aria-current]="activeIndex === i ? 'true' : null">
+          </button>
+        </div>
+
       </div>
     </div>
-  </section>
+  </div>
+</section>

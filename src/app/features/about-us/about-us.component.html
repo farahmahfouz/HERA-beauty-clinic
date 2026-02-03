@@ -1,0 +1,92 @@
+<section class="grid gap-12 py-20 bg-cream">
+    <div class="layout-container-lg">
+        <div class="py-20 px-5 lg:px-0 flex flex-col items-center gap-10">
+            <h1 class="text-start text-3xl md:text-6xl font-bold tracking-wider capitalize text-dark max-w-4xl">
+                About Us &<br />
+                Meet the Team
+            </h1>
+
+            <p class="text-center md:text-start text-lg md:text-xl text-dark/80 leading-relaxed max-w-4xl">
+                At HERA CLINIC, your skin’s health and beauty are our top priority. Our licensed experts bring
+                specialized skills and personalized care to every treatment, ensuring results tailored to your unique
+                skin needs and goals.
+            </p>
+
+            <p class="text-center md:text-start text-lg md:text-xl text-dark/80 leading-relaxed max-w-4xl">
+                HERA CLINIC's team of experienced, licensed laser technicians and estheticians brings both skill and
+                heart to what we do. We’re committed to creating a space where you feel confident asking questions,
+                understood during your consultations, and supported throughout your journey.
+            </p>
+
+            <!-- الصورة -->
+            <div class="w-full flex justify-center">
+                <img ngSrc="/images/doctors.jpg" alt="doctors" loading="lazy"
+                    class="w-full max-w-5xl h-[530px] object-cover shadow-xs" width="700" height="300"/>
+            </div>
+        </div>
+
+        @for (doctor of doctors; track doctor.id; let i = $index) {
+        <div class="grid grid-cols-1 md:grid-cols-2 items-center md:pt-10" [class.md:grid-flow-col-dense]="i % 2 === 1">
+
+            <div class="w-full relative flex items-center justify-center pb-5 md:pb-0"
+                [class.md:col-start-2]="i % 2 === 1">
+                <img [ngSrc]="doctor.image" [alt]="doctor.name"
+                    class="w-96 h-96 md:w-[28rem] md:h-[28rem] lg:w-[32rem] lg:h-[32rem] object-cover shadow-xs z-10"
+                    loading="lazy" width="500" height="500" />
+            </div>
+
+            <div class="flex flex-col gap-3 items-center md:items-start text-center md:text-left relative">
+                <div class="absolute -top-5 left-0 w-20 h-0.5 bg-gradient-to-r from-amber-600 to-transparent"></div>
+
+                <h3 class="text-3xl font-semibold uppercase text-dark">
+                    {{ doctor.name }}
+                </h3>
+
+                <p class="text-dark/80 leading-relaxed text-lg md:text-xl">
+                    {{ doctor.bio }}
+                </p>
+
+                <div class="flex flex-col gap-2 mt-4">
+                    <p class="text-sm uppercase tracking-widest text-dark/70">
+                        Areas of Expertise
+                    </p>
+                    @for (expert of doctor.expertise; track expert) {
+                    <span class="text-lg font-medium text-dark hover:text-dark/70 transition-all duration-200">
+                        ✦ {{ expert }}
+                    </span>
+                    }
+                </div>
+            </div>
+
+        </div>
+        }
+
+        <section class="max-w-7xl mx-auto  md:px-10 pt-16 md:py-48">
+            <!-- Section Header -->
+            <div class="relative mb-16 md:mb-20">
+                <div class="absolute -top-5 left-0 w-20 h-0.5 bg-gradient-to-r from-amber-600 to-transparent"></div>
+                <h1 class="text-4xl md:text-5xl lg:text-6xl font-light text-dark mb-3 tracking-wide">
+                    Our Philosophy of Care
+                </h1>
+                <p class="text-lg md:text-base text-gray-600 tracking-wider font-light">
+                    Core Values for Skin-Centered Care and Results
+                </p>
+            </div>
+
+            <!-- Values Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-12 lg:gap-14">
+                <div *ngFor="let value of values; let i = index">
+                    <h3 class="text-2xl md:text-3xl font-semibold text-dark mb-5 pb-4 relative">
+                        {{ value.title }}
+                        <span
+                            class="absolute bottom-0 left-0 h-0.5 w-10 bg-amber-600 transition-all duration-300 group-hover:w-16"></span>
+                    </h3>
+
+                    <p class="text-base md:text-lg leading-relaxed text-gray-700 font-light">
+                        {{ value.description }}
+                    </p>
+                </div>
+            </div>
+        </section>
+    </div>
+</section>

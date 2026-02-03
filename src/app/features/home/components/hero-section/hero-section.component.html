@@ -2,24 +2,30 @@
   <div class="grid grid-cols-1 lg:grid-cols-2 layout-container-lg items-center justify-center gap-12 lg:gap-24 py-12">
     <div class="flex flex-wrap gap-2 justify-center lg:justify-start">
       <div class="shrink h-77.5 overflow-hidden hidden md:block">
-        <img src="/images/inject.jpg" class="w-full h-full object-cover hover:scale-120 duration-500 ease-in-out z-10" />
+        <img ngSrc="/images/inject.jpg" width="400" height="600"
+          class="w-full h-full object-cover hover:scale-120 duration-500 ease-in-out z-10" loading="lazy" alt="inject"/>
       </div>
 
       <div class="grow h-77.5 overflow-hidden hidden md:block">
-        <img src="/images/clinic.jpg" class="w-full h-full object-cover hover:scale-120 duration-500 ease-in-out z-10" />
+        <img ngSrc="/images/clinic.jpg" width="400" height="600"
+          class="w-full h-full object-cover hover:scale-120 duration-500 ease-in-out z-10" priority alt="clinic"/>
       </div>
 
       <div class="grow h-77.5 overflow-hidden hidden md:block">
-        <img src="/images/candel.jpg" class="w-full h-full object-cover hover:scale-120 duration-500 ease-in-out z-10" />
+        <img ngSrc="/images/candel.jpg" width="400" height="600"
+          class="w-full h-full object-cover hover:scale-120 duration-500 ease-in-out z-10" loading="lazy" alt="candel"/>
       </div>
-      
+
       <div class="shrink h-77.5 overflow-hidden hidden md:block">
-        <img src="/images/laser.jpg" class="w-full h-full object-cover hover:scale-120 duration-500 ease-in-out z-10" />
-      </div>    
+        <img ngSrc="/images/laser.jpg" width="400" height="600"
+          class="w-full h-full object-cover hover:scale-120 duration-500 ease-in-out z-10" loading="lazy" alt="laser"/>
+      </div>
     </div>
-    
+
     <div class="space-y-4">
-      <h1 class="text-3xl sm:text-4xl lg:text-5xl font-semibold uppercase font-serif tracking-wide leading-tight lg:leading-6.7">{{'welcome in hera clinic' | letter:100 | async}}</h1>
+      <h1
+        class="text-3xl sm:text-4xl lg:text-5xl font-semibold uppercase font-serif tracking-wide leading-tight lg:leading-6.7">
+        {{'welcome in hera clinic' | letter:100 | async}}</h1>
       <p class="py-3 md:py-6 text-lg sm:text-xl lg:text-2xl font-light md:mb-12">
         Your first step toward self-acceptance, care, and confidence
       </p>
@@ -30,22 +36,22 @@
         <div class="avatar-group -space-x-6 bg-circle">
           <div class="avatar">
             <div class="w-12">
-              <img src="https://img.daisyui.com/images/profile/demo/batperson@192.webp" />
+              <img src="https://img.daisyui.com/images/profile/demo/batperson@192.webp" alt="batperson" />
             </div>
           </div>
           <div class="avatar">
             <div class="w-12">
-              <img src="https://img.daisyui.com/images/profile/demo/spiderperson@192.webp" />
+              <img src="https://img.daisyui.com/images/profile/demo/spiderperson@192.webp" alt="spiderperson" />
             </div>
           </div>
           <div class="avatar">
             <div class="w-12">
-              <img src="https://img.daisyui.com/images/profile/demo/averagebulk@192.webp" />
+              <img src="https://img.daisyui.com/images/profile/demo/averagebulk@192.webp" alt="averagebulk" />
             </div>
           </div>
           <div class="avatar">
             <div class="w-12">
-              <img src="https://img.daisyui.com/images/profile/demo/wonderperson@192.webp" />
+              <img src="https://img.daisyui.com/images/profile/demo/wonderperson@192.webp" alt="wonderperson" />
             </div>
           </div>
         </div>

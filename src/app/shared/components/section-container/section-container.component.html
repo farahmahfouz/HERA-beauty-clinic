@@ -4,15 +4,12 @@
       {{ title }}
     </h2>
 
-    <p
-      *ngFor="let paragraph of paragraphs"
-      class="text-dark font-medium tracking-wide"
-    >
+    <p *ngFor="let paragraph of paragraphs" class="text-dark font-medium tracking-wide">
       {{ paragraph }}
     </p>
   </div>
 
   <div class="w-full lg:w-4xl h-96 overflow-hidden">
-    <img [src]="image" [alt]="title" class="w-full h-full object-cover" />
+    <img [ngSrc]="image" [alt]="title" class="w-full h-full object-cover" width="400" height="600" loading="lazy" />
   </div>
 </section>

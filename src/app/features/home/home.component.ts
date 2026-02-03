@@ -5,11 +5,12 @@ import { LogoComponent } from './components/logo/logo.component';
 import { LaserMachineComponent } from './components/laser-machine/laser-machine.component';
 import { ReviewsComponent } from "./components/reviews/reviews.component";
 import { PopupComponent } from "./components/popup/popup.component";
+import { DoctorsComponent } from "./components/doctors/doctors.component";
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [HeroSectionComponent, ServicesSectionComponent, LogoComponent, LaserMachineComponent, ReviewsComponent, PopupComponent],
+  imports: [HeroSectionComponent, ServicesSectionComponent, LogoComponent, LaserMachineComponent, ReviewsComponent, PopupComponent, DoctorsComponent],
   templateUrl: './home.component.html',
   styles: ``
 })

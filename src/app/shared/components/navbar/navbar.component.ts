@@ -27,6 +27,7 @@ export class NavbarComponent implements OnInit {
     { label: 'Home', route: '/', type: 'link' },
     { label: 'Services', route: '/services', type: 'services' },
     { label: 'About', route: '/about', type: 'link' },
+    { label: 'Contact', route: '/contact', type: 'link' },
   ];
 
   ngOnInit() {

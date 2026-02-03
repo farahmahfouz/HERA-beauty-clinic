@@ -1,10 +1,10 @@
-import { NgFor } from '@angular/common';
+import { NgFor, NgOptimizedImage } from '@angular/common';
 import { Component, Input } from '@angular/core';
 
 @Component({
   selector: 'app-section-container',
   standalone: true,
-  imports: [NgFor],
+  imports: [NgFor, NgOptimizedImage],
   templateUrl: './section-container.component.html',
   styleUrl: './section-container.component.css'
 })

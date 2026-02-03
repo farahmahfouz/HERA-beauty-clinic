@@ -1,6 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { RatingsComponent } from "../../../../shared/components/ratings/ratings.component";
-import { NgClass, NgFor } from '@angular/common';
+import { NgClass, NgFor, NgOptimizedImage } from '@angular/common';
 import { interval, Subscription } from 'rxjs';
 import { ReviewsService } from '../../../../core/services/reviews.service';
 import { Review } from './reviews';
@@ -8,7 +8,7 @@ import { Review } from './reviews';
 @Component({
   selector: 'app-reviews',
   standalone: true,
-  imports: [RatingsComponent, NgClass, NgFor],
+  imports: [RatingsComponent, NgClass, NgFor, NgOptimizedImage],
   templateUrl: './reviews.component.html',
   styleUrl: './reviews.component.css'
 })

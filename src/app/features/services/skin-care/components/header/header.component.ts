@@ -1,11 +1,11 @@
-import { NgFor } from '@angular/common';
+import { NgFor, NgOptimizedImage } from '@angular/common';
 import { Component } from '@angular/core';
 import { ButtonComponent } from '../../../../../shared/components/button/button.component';
 
 @Component({
   selector: 'app-header',
   standalone: true,
-  imports: [NgFor, ButtonComponent],
+  imports: [NgFor, ButtonComponent, NgOptimizedImage],
   templateUrl: './header.component.html',
   styleUrl: './header.component.css'
 })

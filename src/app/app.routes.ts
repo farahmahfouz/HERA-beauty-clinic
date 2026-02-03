@@ -17,8 +17,13 @@ export const routes: Routes = [
     },
     {
         path: 'about',
-        loadComponent: () => import('./features/clinc-info/clinc-info.component').then(m => m.ClincInfoComponent),
+        loadComponent: () => import('./features/about-us/about-us.component').then(m => m.AboutUsComponent),
         title: 'About Us'
+    },
+    {
+        path: 'contact',
+        loadComponent: () => import('./features/clinc-info/clinc-info.component').then(m => m.ClincInfoComponent),
+        title: 'Contact Us'
     },
     {
         path: 'account',

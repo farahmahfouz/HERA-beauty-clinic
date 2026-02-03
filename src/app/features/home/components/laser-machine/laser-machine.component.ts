@@ -1,9 +1,10 @@
 import { Component } from '@angular/core';
+import { NgOptimizedImage } from "@angular/common";
 
 @Component({
   selector: 'app-laser-machine',
   standalone: true,
-  imports: [],
+  imports: [NgOptimizedImage],
   templateUrl: './laser-machine.component.html',
   styleUrl: './laser-machine.component.css'
 })
