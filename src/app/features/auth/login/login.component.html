@@ -8,12 +8,8 @@
                 #email="ngModel" autocomplete="email" />
             @if (email.invalid && (email.touched || email.dirty)) {
             <small class="text-red-500 text-sm">
-                @if (email.errors?.['required']) {
-                Email is required
-                }
-                @if (email.errors?.['email']) {
-                Please enter a valid email
-                }
+                <span *ngIf="email.errors?.['required']">Email is required</span>
+                <span *ngIf="email.errors?.['email']">Please enter a valid email</span>
             </small>
             }
         </app-control>
@@ -24,15 +20,14 @@
                 #password="ngModel" autocomplete="current-password" />
             @if (password.invalid && (password.touched || password.dirty)) {
             <small class="text-red-500 text-sm">
-                @if (password.errors?.['required']) {
-                Password is required
-                }
-                @if (password.errors?.['minlength']) {
-                Password must be at least 8 characters
-                }
+                <span *ngIf="password.errors?.['required']">Password is required</span>
+                <span *ngIf="password.errors?.['minlength']">Password must be at least 8 characters</span>
             </small>
             }
         </app-control>
+
+        <small class="text-red-500 text-sm py-3" *ngIf="serverError">{{ serverError }}</small>
+
 
         <button type="submit" appButton variant="primary" [disabled]="isLoading">
             @if(isLoading){

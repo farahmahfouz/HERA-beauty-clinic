@@ -5,11 +5,12 @@ import { debounceTime } from 'rxjs';
 import { ControlComponent } from "../../../shared/components/control/control.component";
 import { ButtonComponent } from '../../../shared/components/button/button.component';
 import { AuthService } from '../../../core/services/auth.service';
+import { NgIf } from '@angular/common';
 
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [ModalComponent, FormsModule, ControlComponent, ButtonComponent],
+  imports: [ModalComponent, FormsModule, ControlComponent, ButtonComponent, NgIf],
   templateUrl: './login.component.html',
   styleUrl: './login.component.css'
 })
@@ -18,6 +19,7 @@ export class LoginComponent {
   private modal = viewChild.required<ModalComponent>('modal');
   closeModal = output<void>();
   isLoading = false;
+  serverError: string | null = null;
 
   constructor(private authService: AuthService, private destroyRef: DestroyRef) {
     afterNextRender(() => {
@@ -49,6 +51,7 @@ export class LoginComponent {
     const email = formData.form.value.email;
     const password = formData.form.value.password;
 
+    this.serverError = null;
     this.isLoading = true;
     this.authService.login({ email, password }).subscribe({
       next: (res) => {
@@ -56,9 +59,9 @@ export class LoginComponent {
         this.onCloseModal()
       },
       error: (err) => {
-        console.error(err);
+        this.isLoading = false;
+        this.serverError = err?.error?.message || 'Something went wrong';
       }
     })
-    formData.reset();
   }
 }

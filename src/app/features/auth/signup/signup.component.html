@@ -1,86 +1,62 @@
 <app-modal #modal (closeModal)="onCloseModal()">
-    <form class="px-6 rounded-md w-full max-w-md space-y-2" [formGroup]="form" (ngSubmit)="onSubmit()">
+    <form class="px-6 rounded-md w-full max-w-md space-y-4" [formGroup]="form" (ngSubmit)="onSubmit()">
         <h2 class="text-2xl font-bold text-center">Create Account</h2>
 
         <!-- Name -->
         <app-control label="Name">
-            <input type="text" name="name" required placeholder="Your name" formControlName="name"
-                autocomplete="name" />
-            @if (name) {
-            <small class="text-red-500 text-sm pb-2">
-                Name is required
+            <input type="text" placeholder="Your name" formControlName="name" autocomplete="name" />
+            <small class="text-red-500 text-sm" *ngIf="nameErrors">
+                <span *ngIf="nameErrors['required']">Name is required</span>
+                <span *ngIf="nameErrors['server']">{{ nameErrors['server'] }}</span>
             </small>
-            }
         </app-control>
 
+        <!-- Username -->
         <app-control label="Username">
-            <input type="text" name="username" required minlength="4" placeholder="yourusername"
-                formControlName="username" autocomplete="username" />
-            @if (username) {
-            <small class="text-red-500 text-sm">
-                @if (form.controls.username.errors?.['required']) {
-                Username is required
-                }
-                @if (form.controls.username.errors?.['minlength']) {
-                Username must be at least 4 characters
-                }
+            <input type="text" placeholder="yourusername" formControlName="username" autocomplete="username" />
+            <small class="text-red-500 text-sm" *ngIf="usernameErrors">
+                <span *ngIf="usernameErrors['required']">Username is required</span>
+                <span *ngIf="usernameErrors['minlength']">Username must be at least 4 characters</span>
+                <span *ngIf="usernameErrors['server']">{{ usernameErrors['server'] }}</span>
             </small>
-            }
         </app-control>
 
         <!-- Email -->
         <app-control label="Email">
-            <input type="email" name="email" required placeholder="you@example.com" formControlName="email"
-                autocomplete="email" />
-            @if (email) {
-            <small class="text-red-500 text-sm">
-                @if (form.controls.email.errors?.['required']) {
-                Email is required
-                }
-                @if (form.controls.email.errors?.['email']) {
-                Please enter a valid email
-                }
+            <input type="email" placeholder="you@example.com" formControlName="email" autocomplete="email" />
+            <small class="text-red-500 text-sm" *ngIf="emailErrors">
+                <span *ngIf="emailErrors['required']">Email is required</span>
+                <span *ngIf="emailErrors['email']">Please enter a valid email</span>
+                <span *ngIf="emailErrors['server']">{{ emailErrors['server'] }}</span>
             </small>
-            }
         </app-control>
 
         <!-- Password -->
         <app-control label="Password">
-            <input type="password" name="password" minlength="8" required placeholder="********"
-                formControlName="password" autocomplete="new-password" />
-            @if (password) {
-            <small class="text-red-500 text-sm">
-                @if (form.controls.password.errors?.['required']) {
-                Password is required
-                }
-                @if (form.controls.password.errors?.['minlength']) {
-                Password must be at least 8 characters
-                }
+            <input type="password" placeholder="********" formControlName="password" autocomplete="new-password" />
+            <small class="text-red-500 text-sm" *ngIf="passwordErrors">
+                <span *ngIf="passwordErrors['required']">Password is required</span>
+                <span *ngIf="passwordErrors['minlength']">Password must be at least 8 characters</span>
+                <span *ngIf="passwordErrors['server']">{{ passwordErrors['server'] }}</span>
             </small>
-            }
         </app-control>
 
         <!-- Phone -->
         <app-control label="Phone">
-            <input type="text" name="phone" required pattern="^\+20\d{10}$" placeholder="+201234567890"
-                formControlName="phone" />
-            <p class="text-xs text-gray-500 mt-1">
-                Must start with +20 and contain 10 digits
-            </p>
-            @if (phone) {
-            <small class="text-red-500 text-sm">
-                @if (form.controls.phone.errors?.['required']) {
-                Phone number is required
-                }
-                @if (form.controls.phone.errors?.['pattern']) {
-                Phone must start with +20 and contain 10 digits
-                }
+            <input type="text" placeholder="+201234567890" formControlName="phone" />
+            <p class="text-xs text-gray-500 mt-1">Must start with +20 and contain 10 digits</p>
+            <small class="text-red-500 text-sm" *ngIf="phoneErrors">
+                <span *ngIf="phoneErrors['required']">Phone number is required</span>
+                <span *ngIf="phoneErrors['pattern']">Phone must start with +20 and contain 10 digits</span>
+                <span *ngIf="phoneErrors['server']">{{ phoneErrors['server'] }}</span>
             </small>
-            }
         </app-control>
 
+        <!-- General API error -->
+        <small class="text-red-500 text-sm" *ngIf="apiError">{{ apiError }}</small>
+
         <!-- Submit -->
-        <button type="submit" appButton variant="primary" [disabled]="isLoading">
+        <button type="submit" appButton variant="primary" [disabled]="isLoading" class="w-full">
             @if(isLoading){
             <span class="loading loading-spinner loading-sm pe-0.5"></span>
             <span>Loading...</span>
@@ -88,6 +64,5 @@
             <span>Sign Up</span>
             }
         </button>
-
     </form>
 </app-modal>

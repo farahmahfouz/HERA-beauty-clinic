@@ -1,84 +1,63 @@
-import { afterNextRender, Component, OnInit, output, viewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, Output, EventEmitter } from '@angular/core';
 import { ModalComponent } from "../../../shared/components/modal/modal.component";
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ButtonComponent } from '../../../shared/components/button/button.component';
 import { ControlComponent } from "../../../shared/components/control/control.component";
 import { AuthService } from '../../../core/services/auth.service';
+import { NgIf } from '@angular/common';
 
 @Component({
   selector: 'app-signup',
   standalone: true,
-  imports: [ModalComponent, ReactiveFormsModule, ButtonComponent, ControlComponent],
+  imports: [ModalComponent, ReactiveFormsModule, ButtonComponent, ControlComponent, NgIf],
   templateUrl: './signup.component.html',
-  styleUrl: './signup.component.css'
+  styleUrls: ['./signup.component.css']
 })
-export class SignupComponent {
-  private modal = viewChild.required<ModalComponent>('modal');
-  closeModal = output<void>();
+export class SignupComponent implements OnInit {
+  @ViewChild('modal', { static: true }) modal!: ModalComponent;
+  @Output() closeModal = new EventEmitter<void>();
+
   isLoading = false;
+  apiError: string | null = null;
 
   form = new FormGroup({
-    name: new FormControl('', {
-      validators: [Validators.required]
-    }),
-
-    username: new FormControl('', {
-      validators: [Validators.required]
-    }),
-
-    email: new FormControl('', {
-      validators: [Validators.required, Validators.email]
-    }),
-
-    password: new FormControl('', {
-      validators: [Validators.required, Validators.minLength(8)]
-    }),
-
-    phone: new FormControl('', {
-      validators: [
-        Validators.required,
-        Validators.pattern(/^\+20\d{10}$/)
-      ]
-    }),
+    name: new FormControl('', [Validators.required]),
+    username: new FormControl('', [Validators.required, Validators.minLength(4)]),
+    email: new FormControl('', [Validators.required, Validators.email]),
+    password: new FormControl('', [Validators.required, Validators.minLength(8)]),
+    phone: new FormControl('', [Validators.required, Validators.pattern(/^\+20\d{10}$/)])
   });
 
-  get email() {
-    return (
-      this.form.controls.email.touched &&
-      this.form.controls.email.dirty &&
-      this.form.controls.email.invalid
-    )
+  constructor(private authService: AuthService) { }
+
+  ngOnInit() {
+    // Open modal after view init
+    setTimeout(() => this.modal.open(), 0);
   }
 
-  get name() {
-    return this.form.controls.name.touched &&
-      this.form.controls.name.dirty &&
-      this.form.controls.name.invalid
+  get nameErrors() {
+    const control = this.form.controls.name;
+    return (control.touched || control.dirty || control.errors?.['server']) ? control.errors : null;
   }
 
-  get username() {
-    return this.form.controls.username.touched &&
-      this.form.controls.username.dirty &&
-      this.form.controls.username.invalid
+  get usernameErrors() {
+    const control = this.form.controls.username;
+    return (control.touched || control.dirty || control.errors?.['server']) ? control.errors : null;
   }
 
-  get password() {
-    return this.form.controls.password.touched &&
-      this.form.controls.password.dirty &&
-      this.form.controls.password.invalid
+  get emailErrors() {
+    const control = this.form.controls.email;
+    return (control.touched || control.dirty || control.errors?.['server']) ? control.errors : null;
   }
 
-  get phone() {
-    return this.form.controls.phone.touched &&
-      this.form.controls.phone.dirty &&
-      this.form.controls.phone.invalid
+  get passwordErrors() {
+    const control = this.form.controls.password;
+    return (control.touched || control.dirty || control.errors?.['server']) ? control.errors : null;
   }
 
-  constructor(private authService: AuthService) {
-    afterNextRender(() => {
-      // Open modal when component loads
-      this.modal().open();
-    });
+  get phoneErrors() {
+    const control = this.form.controls.phone;
+    return (control.touched || control.dirty || control.errors?.['server']) ? control.errors : null;
   }
 
   onCloseModal() {
@@ -86,20 +65,37 @@ export class SignupComponent {
   }
 
   onSubmit() {
-    if (this.form.invalid) {
-      console.log('Invalid');
-      return
-    }
+    if (this.form.invalid) return;
 
     this.isLoading = true;
+    this.apiError = null;
+
     this.authService.signup(this.form.value).subscribe({
-      next: (res) => {
+      next: () => {
         this.isLoading = false;
         this.onCloseModal();
       },
       error: (err) => {
-        console.error(err);
+        this.isLoading = false;
+        const message = err?.error?.message || 'Something went wrong';
+
+        // Map backend error to the correct form control
+        if (typeof message === 'string') {
+          const lower = message.toLowerCase();
+          if (lower.includes('email')) {
+            this.form.controls.email.setErrors({ server: message });
+          } else if (lower.includes('username')) {
+            this.form.controls.username.setErrors({ server: message });
+          } else if (lower.includes('phone')) {
+            this.form.controls.phone.setErrors({ server: message });
+          } else {
+            this.apiError = message;
+          }
+        } else {
+          // fallback if message is object or array
+          this.apiError = JSON.stringify(message);
+        }
       }
-    })
+    });
   }
 }
