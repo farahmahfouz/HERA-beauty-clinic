@@ -1,8 +1,11 @@
 {
-  "routes": [
+  "buildCommand": "npm run build",
+  "outputDirectory": "dist/women-clinic/browser",
+  "framework": "angular",
+  "rewrites": [
     {
-      "src": "/(.*)",
-      "dest": "/index.html"
+      "source": "/(.*)",
+      "destination": "/index.html"
     }
   ]
 }
