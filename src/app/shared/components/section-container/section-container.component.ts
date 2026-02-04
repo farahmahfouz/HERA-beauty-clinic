@@ -1,10 +1,11 @@
 import { NgFor, NgOptimizedImage } from '@angular/common';
 import { Component, Input } from '@angular/core';
+import { SlideupDirective } from '../../directives/slideup.directive';
 
 @Component({
   selector: 'app-section-container',
   standalone: true,
-  imports: [NgFor, NgOptimizedImage],
+  imports: [NgFor, NgOptimizedImage, SlideupDirective],
   templateUrl: './section-container.component.html',
   styleUrl: './section-container.component.css'
 })

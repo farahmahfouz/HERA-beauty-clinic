@@ -1,48 +1,49 @@
 <section class="grid gap-12 py-20 layout-container-lg">
-    <h1 class="text-center text-3xl md:text-4xl font-bold tracking-wider capitalize text-dark">our services for your beauty</h1>
-    @for (service of services; track service._id; let i = $index) {
+  <h1 class="text-center text-3xl md:text-4xl font-bold tracking-wider capitalize text-dark">our services for your
+    beauty</h1>
+  @for (service of services; track service._id; let i = $index) {
 
-    <div class="grid grid-cols-1 md:grid-cols-2 items-center md:pt-10" [class.md:grid-flow-col-dense]="i % 2 === 1">
-        <!-- Image -->
-        <div class="w-full relative step-img-box flex items-center justify-center pb-5 md:pb-0"
-            [class.md:col-start-2]="i % 2 === 1">
-            <img [src]="service.coverImage" [alt]="service.name" class="w-80 h-80 lg:w-96 lg:h-96  rounded-full object-cover z-10" loading="lazy"/>
-        </div>
-
-        <!-- Description -->
-        <div class="flex flex-col gap-3 items-center">
-            <h3 class="text-3xl font-semibold uppercase text-dark">
-                {{ service.name }}
-            </h3>
-
-            <p class="text-dark/80 leading-relaxed text-xl text-center">
-                {{ service.description }}
-            </p>
-
-            <app-ratings [value]="service.ratingsAverage" />
-            <div class="flex flex-col gap-3 mt-6 items-center text-center">
-                <p class="text-sm uppercase tracking-widest text-dark/70">
-                  Available treatments
-                </p>
-              
-                @for (sub of service.subServices; track sub.id) {
-                  <a
-                    [routerLink]="['/services', sub.slug]"
-                    class="text-lg font-medium text-dark
-                           hover:translate-x-1 hover:text-dark/70
-                           transition-all duration-200 capitalize"
-                  >
-                    ✦ {{ sub.name }}
-                  </a>
-                }
-              
-                <p class="text-sm text-dark/80 mt-2">
-                  Personalized sessions based on your skin & hair needs
-                </p>
-              
-              </div>
-              
-        </div>
+  <div class="grid grid-cols-1 md:grid-cols-2 items-center md:pt-10 service-item"
+    [class.md:grid-flow-col-dense]="i % 2 === 1" appSlideup>
+    <!-- Image -->
+    <div class="w-full relative step-img-box flex items-center justify-center pb-5 md:pb-0"
+      [class.md:col-start-2]="i % 2 === 1">
+      <img [src]="service.coverImage" [alt]="service.name"
+        class="w-80 h-80 lg:w-96 lg:h-96 rounded-full object-cover z-10" loading="lazy" />
     </div>
-    }
+
+    <!-- Description -->
+    <div class="flex flex-col gap-3 items-center">
+      <h3 class="text-3xl font-semibold uppercase text-dark">
+        {{ service.name }}
+      </h3>
+
+      <p class="text-dark/80 leading-relaxed text-xl text-center">
+        {{ service.description }}
+      </p>
+
+      <app-ratings [value]="service.ratingsAverage" />
+      <div class="flex flex-col gap-3 mt-6 items-center text-center">
+        <p class="text-sm uppercase tracking-widest text-dark/70">
+          Available treatments
+        </p>
+
+        @for (sub of service.subServices; track sub.id) {
+
+        <a [routerLink]="['/services', sub.slug]" class="text-lg font-medium text-dark
+                           hover:translate-x-1 hover:text-dark/70
+                           transition-all duration-200 capitalize">
+          ✦ {{ sub.name }}
+        </a>
+        }
+
+        <p class="text-sm text-dark/80 mt-2">
+          Personalized sessions based on your skin & hair needs
+        </p>
+
+      </div>
+
+    </div>
+  </div>
+  }
 </section>

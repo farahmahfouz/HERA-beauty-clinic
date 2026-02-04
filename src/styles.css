@@ -20,11 +20,11 @@ html {
 }
 
 .layout-container {
-  @apply mx-auto px-6 max-w-[1200px];
+  @apply mx-auto px-6 max-w-[75%];
 }
 
 .layout-container-lg {
-  @apply mx-auto px-6 max-w-[1376px];
+  @apply mx-auto px-6 max-w-[82%];
 }
 
 :root {
@@ -73,6 +73,17 @@ dialog::backdrop {
   }
 }
 
+/* appSlideup directive: slide-up on scroll into view */
+[appSlideup] {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: opacity 700ms cubic-bezier(0.25, 0.46, 0.45, 0.94),
+    transform 700ms cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+[appSlideup].slide-up-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
 
 .bg-circle::before,
 .bg-circle::after {

@@ -4,11 +4,12 @@ import { NgClass, NgFor, NgOptimizedImage } from '@angular/common';
 import { interval, Subscription } from 'rxjs';
 import { ReviewsService } from '../../../../core/services/reviews.service';
 import { Review } from './reviews';
+import { SlideupDirective } from '../../../../shared/directives/slideup.directive';
 
 @Component({
   selector: 'app-reviews',
   standalone: true,
-  imports: [RatingsComponent, NgClass, NgFor, NgOptimizedImage],
+  imports: [RatingsComponent, NgClass, NgFor, NgOptimizedImage, SlideupDirective],
   templateUrl: './reviews.component.html',
   styleUrl: './reviews.component.css'
 })
@@ -32,7 +33,7 @@ export class ReviewsComponent implements OnInit, OnDestroy {
         this.error = 'Error loading reviews';
         this.isLoading = false;
       }
-    })
+    });
   }
 
   ngOnDestroy() {

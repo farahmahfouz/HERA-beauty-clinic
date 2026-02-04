@@ -4,11 +4,12 @@ import { RatingsComponent } from "../ratings/ratings.component";
 import { FormsModule } from '@angular/forms';
 import { ReviewsService } from '../../../core/services/reviews.service';
 import { ToastService } from '../../../core/services/toast.service';
+import { SlideupDirective } from '../../directives/slideup.directive';
 
 @Component({
   selector: 'app-review',
   standalone: true,
-  imports: [ButtonComponent, RatingsComponent, FormsModule],
+  imports: [ButtonComponent, RatingsComponent, FormsModule, SlideupDirective],
   templateUrl: './review.component.html',
   styleUrl: './review.component.css'
 })

@@ -1,5 +1,6 @@
 import { ApplicationConfig, provideZoneChangeDetection } from '@angular/core';
 import { provideRouter, TitleStrategy, withPreloading, PreloadAllModules } from '@angular/router';
+import { provideAnimations } from "@angular/platform-browser/animations";
 
 import { routes } from './app.routes';
 import { AppTitleStrategy } from './core/utils/appleTitle.strategy';
@@ -13,5 +14,8 @@ export const appConfig: ApplicationConfig = {
     provideRouter(routes, withPreloading(PreloadAllModules)),
     { provide: TitleStrategy, useClass: AppTitleStrategy },
     provideHttpClient(withInterceptors([apiInterceptor, errorInterceptor])),
+    provideAnimations()
   ],
 };
+
+

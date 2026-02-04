@@ -1,5 +1,6 @@
 import { NgOptimizedImage } from '@angular/common';
 import { Component, Input } from '@angular/core';
+import { SlideupDirective } from '../../directives/slideup.directive';
 
 interface Benefits {
   img: string;
@@ -10,7 +11,7 @@ interface Benefits {
 @Component({
   selector: 'app-benefits',
   standalone: true,
-  imports: [NgOptimizedImage],
+  imports: [NgOptimizedImage, SlideupDirective],
   templateUrl: './benefits.component.html',
   styleUrl: './benefits.component.css'
 })

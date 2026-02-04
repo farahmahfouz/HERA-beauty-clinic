@@ -2,11 +2,12 @@ import { Component, Input, ViewChild } from '@angular/core';
 import { BookingComponent } from '../booking/booking.component';
 import { NgClass, NgIf } from '@angular/common';
 import { ButtonComponent } from '../button/button.component';
+import { SlideupDirective } from '../../directives/slideup.directive';
 
 @Component({
   selector: 'app-pricing',
   standalone: true,
-  imports: [BookingComponent, NgIf, NgClass, ButtonComponent],
+  imports: [BookingComponent, NgIf, NgClass, ButtonComponent, SlideupDirective],
   templateUrl: './pricing.component.html',
   styleUrl: './pricing.component.css'
 })

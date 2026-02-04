@@ -1,0 +1,8 @@
+{
+  "/api": {
+    "target": "https://women-clinic-apis--farahmahfouz11.replit.app",
+    "secure": false,
+    "changeOrigin": true,
+    "logLevel": "debug"
+  }
+}

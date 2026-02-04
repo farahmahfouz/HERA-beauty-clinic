@@ -2,13 +2,14 @@ import { Component, DestroyRef, OnInit } from '@angular/core';
 import { ServicesService } from '../../../../core/services/services.service';
 import { RouterLink } from '@angular/router';
 import { RatingsComponent } from "../../../../shared/components/ratings/ratings.component";
+import { SlideupDirective } from '../../../../shared/directives/slideup.directive';
 
 @Component({
   selector: 'app-services-section',
   standalone: true,
-  imports: [RouterLink, RatingsComponent],
+  imports: [RouterLink, RatingsComponent, SlideupDirective],
   templateUrl: './services-section.component.html',
-  styleUrl: './services-section.component.css',
+  styleUrls: ['./services-section.component.css']
 })
 export class ServicesSectionComponent implements OnInit {
   services: any[] = [];
@@ -19,8 +20,8 @@ export class ServicesSectionComponent implements OnInit {
 
   ngOnInit() {
     const subscription = this.serviceService.loadServices().subscribe({
-      next: (service) => {
-        this.services = service;
+      next: (services) => {
+        this.services = services;
         this.isLoading = false;
       },
       error: (err) => {
@@ -34,4 +35,3 @@ export class ServicesSectionComponent implements OnInit {
     });
   }
 }
-

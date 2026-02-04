@@ -1,10 +1,11 @@
 import { NgFor, NgOptimizedImage } from '@angular/common';
 import { Component } from '@angular/core';
+import { SlideupDirective } from '../../shared/directives/slideup.directive';
 
 @Component({
   selector: 'app-about-us',
   standalone: true,
-  imports: [NgFor, NgOptimizedImage],
+  imports: [NgFor, NgOptimizedImage, SlideupDirective],
   templateUrl: './about-us.component.html',
   styleUrl: './about-us.component.css'
 })
