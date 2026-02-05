@@ -1,5 +1,5 @@
-<nav class="uppercase text-xs lg:text-sm font-medium text-dark py-2 lg:py-4 border-b border-gray-200">
-    <ul class="flex gap-2 lg:gap-8 layout-container-lg cursor-pointer">
+<nav class="uppercase text-xs lg:text-sm font-medium text-dark py-2 md:py-4 border-b border-gray-200">
+    <ul class="flex gap-2 md:gap-6 lg:gap-8 layout-container-lg cursor-pointer">
         @for(item of items; track item.label) {
         <li>
             <a (click)="scrollToSection(item.sectionId, $event)">

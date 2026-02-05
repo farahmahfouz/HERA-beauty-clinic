@@ -24,4 +24,14 @@
   background-color: #fae5d3;
   filter: blur(20px);
   z-index: 2;
+} 
+
+@media (max-width: 768px) {
+  .step-img-box::before,
+  .step-img-box::after {
+    width: 50%;
+    height: 65%;
+    padding-bottom: 30%;
+    z-index: -1;
+  }
 }

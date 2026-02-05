@@ -1,30 +1,52 @@
-<footer class="footer sm:footer-horizontal bg-base-200 text-base-content p-12 lg:p-24">
+<footer class="footer sm:footer-horizontal bg-base-200 text-base-content p-10 lg:p-16">
+  <!-- Logo + short description -->
   <aside>
-    <img src="/images/logo.png" alt="Clinic Logo" class="w-24 h-24 object-cover"/>
-    <p>
+    <img src="/images/logo.png" alt="Hera Women Clinic Logo" class="w-20 h-20 object-cover mb-3" />
+    <p class="font-semibold text-lg tracking-wide">
       HERA WOMEN CLINIC
-      <br />
-      Providing reliable tech since 1992
+    </p>
+    <p class="text-sm max-w-xs">
+      A specialized clinic for women’s health and beauty, providing safe and high‑quality medical and aesthetic care.
     </p>
   </aside>
+
+  <!-- Quick links -->
   <nav>
-    <h6 class="footer-title">Services</h6>
-    <a class="link link-hover">Branding</a>
-    <a class="link link-hover">Design</a>
-    <a class="link link-hover">Marketing</a>
-    <a class="link link-hover">Advertisement</a>
+    <h6 class="footer-title">Quick Links</h6>
+    <a class="link link-hover text-xs" routerLink="/">Home</a>
+    <a class="link link-hover text-xs" routerLink="/about-us">About Us</a>
+    <a class="link link-hover text-xs" routerLink="/services">Services</a>
+    <a class="link link-hover text-xs" routerLink="/contact">Book an Appointment</a>
   </nav>
+
+  <!-- Services -->
   <nav>
-    <h6 class="footer-title">Company</h6>
-    <a class="link link-hover">About us</a>
-    <a class="link link-hover">Contact</a>
-    <a class="link link-hover">Jobs</a>
-    <a class="link link-hover">Press kit</a>
+    <h6 class="footer-title">Our Services</h6>
+    <a class="link link-hover text-xs" routerLink="/services/skin-treatment">Skin Treatments</a>
+    <a class="link link-hover text-xs" routerLink="/services/hair-treatment">Hair Treatments</a>
+    <a class="link link-hover text-xs" routerLink="/services/laser">Laser Hair Removal</a>
+    <a class="link link-hover text-xs" routerLink="/services/fillers">Fillers & Botox</a>
   </nav>
+
+  <!-- Contact info -->
   <nav>
-    <h6 class="footer-title">Legal</h6>
-    <a class="link link-hover">Terms of use</a>
-    <a class="link link-hover">Privacy policy</a>
-    <a class="link link-hover">Cookie policy</a>
+    <h6 class="footer-title">Contact Us</h6>
+    <p class="text-xs">Cairo, Example Street 12, 3rd Floor</p>
+    <p class="text-xs mt-1">
+      Phone:
+      <a href="tel:+201234567890" class="link link-hover">+20 123 456 7890</a>
+    </p>
+    <p class="text-xs">
+      WhatsApp:
+      <a href="https://wa.me/201234567890" target="_blank" class="link link-hover">
+        Chat on WhatsApp
+      </a>
+    </p>
+    <p class="text-sm mt-1">
+      Email:
+      <a href="mailto:info@herawomenclinic.com" class="link link-hover">
+        {{ 'info@herawomenclinic.com' }}
+      </a>
+    </p>
   </nav>
 </footer>

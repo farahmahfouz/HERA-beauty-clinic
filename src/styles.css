@@ -20,11 +20,22 @@ html {
 }
 
 .layout-container {
-  @apply mx-auto px-6 max-w-[75%];
+  @apply mx-auto max-w-[75%];
 }
 
 .layout-container-lg {
-  @apply mx-auto px-6 max-w-[82%];
+  @apply mx-auto max-w-[82%];
+}
+
+@media (max-width: 768px) {
+  .layout-container-lg {
+    @apply mx-auto max-w-[90%];
+  }
+
+  .layout-container {
+    @apply mx-auto max-w-[85%];
+  }
+  
 }
 
 :root {
@@ -35,6 +46,9 @@ html {
   --light-gray: #F0F0F0;
 }
 
+:root {
+  color-scheme: light;
+}
 
 ::selection {
   background-color: rgba(243, 181, 124, 0.507);
@@ -111,4 +125,12 @@ dialog::backdrop {
 .bg-circle::after {
   bottom: 62%;
   right: 1%;
+}
+
+@media (max-width: 640px) {
+  dialog {
+    min-width: 90%;
+    margin: auto;
+    border-radius: 0;
+  }
 }

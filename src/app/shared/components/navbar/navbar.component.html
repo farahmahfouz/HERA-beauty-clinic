@@ -158,13 +158,13 @@
     </ul>
 
     <div class="flex flex-col items-center gap-6 mt-6 border-t border-gray-500/30 pt-4">
-        <p *ngIf="!auth.isLoggedIn" class="text-dark cursor-pointer hover:text-gray-800" (click)="openLoginModal()">
+        <p *ngIf="!auth.isLoggedIn" class="text-dark cursor-pointer hover:text-gray-800" (click)="openLoginModal()" (click)="toggleMenu()">
             Login
         </p>
-        <p *ngIf="!auth.isLoggedIn" class="text-dark cursor-pointer hover:text-gray-800" (click)="openSignupModal()">
+        <p *ngIf="!auth.isLoggedIn" class="text-dark cursor-pointer hover:text-gray-800" (click)="openSignupModal()" (click)="toggleMenu()">
             Signup
         </p>
-        <p *ngIf="auth.isLoggedIn" class="text-dark cursor-pointer hover:text-gray-800" (click)="openLogoutConfirm()">
+        <p *ngIf="auth.isLoggedIn" class="text-dark cursor-pointer hover:text-gray-800"  (click)="openLogoutConfirm()" (click)="toggleMenu()">
             Logout
         </p>
         <a routerLink="/account" class="text-dark cursor-pointer hover:text-gray-800" *ngIf="auth.isLoggedIn"
