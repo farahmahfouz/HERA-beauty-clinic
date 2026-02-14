@@ -144,4 +144,5 @@ export class LaserHairRemovalComponent implements OnChanges {
     { label: 'review', sectionId: 'review' },
     { label: 'faqs', sectionId: 'faqs' },
   ];
+  
 }

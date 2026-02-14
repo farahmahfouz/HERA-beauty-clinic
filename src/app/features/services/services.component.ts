@@ -45,7 +45,6 @@ export class ServicesComponent {
         })
       )
       .subscribe(options => {
-        console.log(options)
         this.options = options;
       });
   }

@@ -18,5 +18,12 @@ export class HeaderComponent {
     '/images/img5.jpg',
     '/images/img6.jpg',
   ];
+  
+  scrollToPricing() {
+    document.getElementById('pricing')?.scrollIntoView({
+      behavior: 'smooth',
+      block: 'start'
+    });
+  }
 
 }

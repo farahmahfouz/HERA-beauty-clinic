@@ -20,20 +20,22 @@
 
                 <div>
                     <p class="text-xl font-semibold">
-                    EG {{ option.price }}
+                        EG {{ option.price }}
                     </p>
                 </div>
             </div>
 
             <!-- RIGHT IMAGE -->
             <div class="relative w-35 h-35">
+                @if(option.img){
                 <img src="/images/laser-placeholder.jpg" alt="Laser Service"
                     class="w-full h-full object-cover rounded-xl" />
+                }
 
                 <!-- SELECT BUTTON -->
-                <button (click)="toggleService(option)" class="absolute -top-3 -right-3 w-9 h-9 text-lg font-bold
-                   flex items-center justify-center transition-colors cursor-pointer" [ngClass]="{
-              'bg-white text-brown border-brown hover:bg-brown hover:text-brown-300':
+                <button (click)="toggleService(option)" class="absolute -top-3 -right-3 w-9 h-9 text-2xl border border-gray-200 rounded-full
+                   flex justify-center transition-colors cursor-pointer" [ngClass]="{
+              ' text-brown border-brown hover:bg-brown hover:text-brown-300':
                 !isSelected(option),
 
               'bg-brown text-brown border-brown':

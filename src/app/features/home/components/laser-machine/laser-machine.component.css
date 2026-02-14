@@ -172,6 +172,11 @@
   .machine img {
     max-width: 260px;
   }
+
+  .features.left, .features.right {
+    align-items: normal;
+    padding-top: 12px;
+  }
 }
 
 

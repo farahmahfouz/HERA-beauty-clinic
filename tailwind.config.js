@@ -1,7 +1,7 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   content: ["./src/**/*.{html,ts}"],
-  safelist: ["max-w-[1200px]", "max-w-[1376px]"],
+  safelist: ["max-w-[1200px]", "max-w-[1376px]", '-space-x-6'],
   theme: {
     extend: {
       colors: {

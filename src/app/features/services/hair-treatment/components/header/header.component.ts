@@ -9,5 +9,10 @@ import { ButtonComponent } from '../../../../../shared/components/button/button.
   styleUrl: './header.component.css'
 })
 export class HeaderComponent {
-
+    scrollToPricing() {
+    document.getElementById('pricing')?.scrollIntoView({
+      behavior: 'smooth',
+      block: 'start'
+    });
+  }
 }

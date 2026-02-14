@@ -10,5 +10,10 @@ import { NgOptimizedImage } from '@angular/common';
   styleUrl: './header.component.css'
 })
 export class HeaderComponent {
-
+    scrollToPricing() {
+    document.getElementById('pricing')?.scrollIntoView({
+      behavior: 'smooth',
+      block: 'start'
+    });
+  }
 }

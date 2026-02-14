@@ -6,14 +6,14 @@ import { LaserMachineComponent } from './components/laser-machine/laser-machine.
 import { ReviewsComponent } from "./components/reviews/reviews.component";
 import { PopupComponent } from "./components/popup/popup.component";
 import { DoctorsComponent } from "./components/doctors/doctors.component";
+import { DiffComponent } from './components/diff/diff.component';
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [HeroSectionComponent, ServicesSectionComponent, LogoComponent, LaserMachineComponent, ReviewsComponent, PopupComponent, DoctorsComponent],
+  imports: [DiffComponent, HeroSectionComponent, ServicesSectionComponent, LogoComponent, LaserMachineComponent, ReviewsComponent, PopupComponent, DoctorsComponent],
   templateUrl: './home.component.html',
   styles: ``
 })
 export class HomeComponent {
-
 }
