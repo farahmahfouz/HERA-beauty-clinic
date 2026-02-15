@@ -132,6 +132,17 @@ src/
 └── styles.css
 ```
 
+## 📸 Screenshots
+
+### 🏠 Home Page
+![Home](./assets/home.png)
+
+### 💎 Services Page
+![Services](./assets/filler.png)
+
+
+![Service](./assets/skin.png)
+
 This README provides a high-level overview of the **Women Clinic** project, including:
 
 - **Project description** — What the application does (clinic website, booking, account)
