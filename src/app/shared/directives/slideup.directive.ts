@@ -1,4 +1,11 @@
-import { Directive, ElementRef, HostBinding, NgZone, OnInit } from '@angular/core';
+import {
+  Directive,
+  ElementRef,
+  HostBinding,
+  NgZone,
+  OnInit,
+  ChangeDetectorRef
+} from '@angular/core';
 
 @Directive({
   selector: '[appSlideup]',
@@ -6,7 +13,8 @@ import { Directive, ElementRef, HostBinding, NgZone, OnInit } from '@angular/cor
 })
 export class SlideupDirective implements OnInit {
 
-  @HostBinding('class.slide-up-visible') get isVisible() {
+  @HostBinding('class.slide-up-visible')
+  get isVisible() {
     return this.visible;
   }
 
@@ -14,7 +22,8 @@ export class SlideupDirective implements OnInit {
 
   constructor(
     private el: ElementRef,
-    private ngZone: NgZone
+    private ngZone: NgZone,
+    private cdr: ChangeDetectorRef
   ) { }
 
   ngOnInit() {
@@ -23,6 +32,7 @@ export class SlideupDirective implements OnInit {
         if (entry.isIntersecting) {
           this.ngZone.run(() => {
             this.visible = true;
+            this.cdr.markForCheck();
           });
           observer.unobserve(entry.target);
         }

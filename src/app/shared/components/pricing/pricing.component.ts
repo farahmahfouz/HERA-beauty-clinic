@@ -1,4 +1,4 @@
-import { Component, Input, ViewChild } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input, ViewChild } from '@angular/core';
 import { BookingComponent } from '../booking/booking.component';
 import { NgClass, NgIf } from '@angular/common';
 import { ButtonComponent } from '../button/button.component';
@@ -7,6 +7,7 @@ import { SlideupDirective } from '../../directives/slideup.directive';
 @Component({
   selector: 'app-pricing',
   standalone: true,
+  changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [BookingComponent, NgIf, NgClass, ButtonComponent, SlideupDirective],
   templateUrl: './pricing.component.html',
   styleUrl: './pricing.component.css'
@@ -26,7 +27,7 @@ export class PricingComponent {
         s => s._id !== option._id
       );
     } else {
-      this.selectedServices.push(option);
+      this.selectedServices = [...this.selectedServices, option]
     }
   }
 
