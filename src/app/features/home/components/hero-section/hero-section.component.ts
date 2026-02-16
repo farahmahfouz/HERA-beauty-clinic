@@ -8,6 +8,7 @@ import { AsyncPipe, NgOptimizedImage } from '@angular/common';
   standalone: true,
   imports: [ButtonComponent, LetterPipe, AsyncPipe, NgOptimizedImage],
   templateUrl: './hero-section.component.html',
+  styleUrl: './hero-section.component.css'
 })
 export class HeroSectionComponent {
 
