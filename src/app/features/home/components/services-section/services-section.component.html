@@ -1,4 +1,16 @@
 <section class="grid gap-12 py-10 md:py-20 layout-container-lg ">
+  @if (isLoading) {
+  <div class="grid gap-8">
+    @for (item of [1,2,3]; track item) {
+      <div class="animate-pulse flex flex-col items-center gap-4">
+        <div class="w-64 h-64 rounded-full bg-gray-300"></div>
+        <div class="h-6 w-40 bg-gray-300 rounded"></div>
+        <div class="h-4 w-64 bg-gray-300 rounded"></div>
+      </div>
+    }
+  </div>
+}
+@else {
   <h1 class="text-center text-3xl md:text-4xl font-bold tracking-wider capitalize text-dark">our services for your
     beauty</h1>
   @for (service of services; track service._id; let i = $index) {
@@ -46,4 +58,5 @@
     </div>
   </div>
   }
+}
 </section>

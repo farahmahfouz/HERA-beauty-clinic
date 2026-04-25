@@ -24,21 +24,34 @@
     </div>
 
     <!-- Calendar -->
-    @if (selectedSchedule) {
-    <div class="flex justify-center">
-      <calendar-date class="cally bg-base-100 border border-base-300 rounded-box" (change)="onDateChange($event)">
-        <svg slot="previous" class="fill-current size-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-          <path d="M15.75 19.5 8.25 12l7.5-7.5"></path>
-        </svg>
+    <!-- Week Picker بدل الـ calendar -->
+@if (selectedSchedule) {
+<div class="mt-4 mb-2">
+  <div class="flex items-center justify-between mb-3">
+    <button type="button" class="btn btn-sm btn-ghost" (click)="prevWeek()">‹</button>
+    <span class="font-medium text-sm">{{ weekRangeLabel }}</span>
+    <button type="button" class="btn btn-sm btn-ghost" (click)="nextWeek()">›</button>
+  </div>
 
-        <svg slot="next" class="fill-current size-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-          <path d="m8.25 4.5 7.5 7.5-7.5 7.5"></path>
-        </svg>
-
-        <calendar-month></calendar-month>
-      </calendar-date>
+  @if (availableDatesForSchedule.length === 0) {
+    <p class="text-center text-gray-400 text-sm py-4">No available days this week</p>
+  } @else {
+    <div class="grid gap-2" [style.grid-template-columns]="'repeat(' + availableDatesForSchedule.length + ', 1fr)'">
+      @for (item of availableDatesForSchedule; track item.date) {
+        <button
+          type="button"
+          class="btn btn-sm flex flex-col h-auto py-2 gap-1"
+          [class.btn-neutral]="selectedDate === item.date"
+          [class.btn-outline]="selectedDate !== item.date"
+          (click)="selectDate(item)">
+          <span class="text-xs font-bold">{{ item.dayName }}</span>
+          <span class="text-base">{{ item.date | date:'d' }}</span>
+        </button>
+      }
     </div>
-    }
+  }
+</div>
+}
 
     <!-- Time Slots -->
     @if (selectedDay) {

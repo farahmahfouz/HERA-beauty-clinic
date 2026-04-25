@@ -11,11 +11,12 @@ import { FormsModule } from '@angular/forms';
 import { BookingService } from '../../../core/services/booking.service';
 import { ButtonComponent } from "../button/button.component";
 import { ToastService } from '../../../core/services/toast.service';
+import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-booking',
   standalone: true,
-  imports: [ModalComponent, FormsModule, ButtonComponent],
+  imports: [ModalComponent, FormsModule, ButtonComponent, DatePipe],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   templateUrl: './booking.component.html',
   styleUrl: './booking.component.css'
@@ -69,17 +70,70 @@ export class BookingComponent implements OnInit {
     this.modal.close();
   }
 
+  // أضف هذه الـ properties
+  availableDatesForSchedule: { date: string; dayName: string; dayData: any }[] = [];
+  weekOffset = 0;
+
+  // استبدل onDoctorChange بـ:
   onDoctorChange(event: Event) {
     const id = (event.target as HTMLSelectElement).value;
-
-    this.selectedSchedule = this.scheduales.find(
-      s => s._id === id
-    );
-
+    this.selectedSchedule = this.scheduales.find(s => s._id === id);
     this.selectedDay = null;
+    this.selectedSlot = null;
+    this.selectedDate = '';
+    this.weekOffset = 0;
+    this.generateWeekDates();
+  }
+
+  generateWeekDates() {
+    if (!this.selectedSchedule) return;
+
+    const availability: any[] = this.selectedSchedule.availability ?? [];
+    const daysOff: string[] = this.selectedSchedule.daysOff ?? [];
+    const workingDayNames = availability.map((d: any) => d.day);
+
+    const today = new Date();
+    const startDate = new Date(today);
+    startDate.setDate(today.getDate() + this.weekOffset * 7);
+
+    const dayNames = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+    const result: { date: string; dayName: string; dayLabel: string; dayData: any }[] = [];
+
+    for (let i = 0; i < 7; i++) {
+      const d = new Date(startDate);
+      d.setDate(startDate.getDate() + i);
+      const dayName = dayNames[d.getDay()];
+
+      if (!daysOff.includes(dayName) && workingDayNames.includes(dayName)) {
+        const dateStr = d.toISOString().split('T')[0];
+        const dayData = availability.find((a: any) => a.day === dayName);
+        result.push({
+          date: dateStr,
+          dayName,
+          dayLabel: `${dayName} ${d.getDate()}`,
+          dayData
+        });
+      }
+    }
+
+    this.availableDatesForSchedule = result as any;
+  }
+
+  selectDate(item: any) {
+    this.selectedDate = item.date;
+    this.selectedDay = item.dayData;
     this.selectedSlot = null;
   }
 
+  prevWeek() { this.weekOffset--; this.generateWeekDates(); }
+  nextWeek() { this.weekOffset++; this.generateWeekDates(); }
+
+  get weekRangeLabel(): string {
+    if (!this.availableDatesForSchedule.length) return '';
+    const first = this.availableDatesForSchedule[0] as any;
+    const last = this.availableDatesForSchedule[this.availableDatesForSchedule.length - 1] as any;
+    return `${first.dayLabel} – ${last.dayLabel}`;
+  }
   onDateChange(event: any) {
     const date = event.target?.value;
     if (!date || !this.selectedSchedule) return;
