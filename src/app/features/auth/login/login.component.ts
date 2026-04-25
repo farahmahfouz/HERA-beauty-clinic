@@ -6,11 +6,13 @@ import { ControlComponent } from "../../../shared/components/control/control.com
 import { ButtonComponent } from '../../../shared/components/button/button.component';
 import { AuthService } from '../../../core/services/auth.service';
 import { NgIf } from '@angular/common';
+import { EyeIconComponent } from "../../../shared/icons/eye-icon.component";
+import { EyeLashIconComponent } from "../../../shared/icons/eye-lash-icon.component";
 
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [ModalComponent, FormsModule, ControlComponent, ButtonComponent, NgIf],
+  imports: [ModalComponent, FormsModule, ControlComponent, ButtonComponent, NgIf, EyeIconComponent, EyeLashIconComponent],
   templateUrl: './login.component.html',
   styleUrl: './login.component.css'
 })
@@ -19,6 +21,7 @@ export class LoginComponent {
   private modal = viewChild.required<ModalComponent>('modal');
   closeModal = output<void>();
   isLoading = false;
+  showPassword = false;
   serverError: string | null = null;
 
   constructor(private authService: AuthService, private destroyRef: DestroyRef) {
@@ -44,6 +47,10 @@ export class LoginComponent {
 
   onCloseModal() {
     this.closeModal.emit();
+  }
+
+  togglePassword() {
+    this.showPassword = !this.showPassword
   }
 
   onSubmit(formData: NgForm) {

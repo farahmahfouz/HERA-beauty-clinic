@@ -5,11 +5,13 @@ import { ButtonComponent } from '../../../shared/components/button/button.compon
 import { ControlComponent } from "../../../shared/components/control/control.component";
 import { AuthService } from '../../../core/services/auth.service';
 import { NgIf } from '@angular/common';
+import { EyeIconComponent } from "../../../shared/icons/eye-icon.component";
+import { EyeLashIconComponent } from '../../../shared/icons/eye-lash-icon.component';
 
 @Component({
   selector: 'app-signup',
   standalone: true,
-  imports: [ModalComponent, ReactiveFormsModule, ButtonComponent, ControlComponent, NgIf],
+  imports: [ModalComponent, ReactiveFormsModule, ButtonComponent, ControlComponent, NgIf, EyeIconComponent, EyeLashIconComponent],
   templateUrl: './signup.component.html',
   styleUrls: ['./signup.component.css']
 })
@@ -18,6 +20,7 @@ export class SignupComponent implements OnInit {
   @Output() closeModal = new EventEmitter<void>();
 
   isLoading = false;
+  showPassword = false;
   apiError: string | null = null;
 
   form = new FormGroup({
@@ -62,6 +65,10 @@ export class SignupComponent implements OnInit {
 
   onCloseModal() {
     this.closeModal.emit();
+  }
+
+  togglePassword() {
+    this.showPassword = !this.showPassword
   }
 
   onSubmit() {

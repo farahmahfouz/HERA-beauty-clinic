@@ -1,22 +1,21 @@
 import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import { map, Observable, shareReplay } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ServicesService {
+  private httpClient = inject(HttpClient);
   private optionsCache: { [slug: string]: Observable<any> } = {};
 
-  constructor(private httpClient: HttpClient) { }
+  private services$ = this.httpClient.get<any>('service').pipe(
+    map(res => res.data.services),
+    shareReplay({ bufferSize: 1, refCount: false }) 
+  );
 
   loadServices() {
-    return this.httpClient.get<any>(`service`).pipe(
-      map(res => {
-        return res.data.services;
-      }),
-      shareReplay({ bufferSize: 1, refCount: true })
-    );
+    return this.services$;
   }
 
   loadSubServices() {

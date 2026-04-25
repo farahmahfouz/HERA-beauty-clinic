@@ -33,12 +33,22 @@
 
         <!-- Password -->
         <app-control label="Password">
-            <input type="password" placeholder="********" formControlName="password" autocomplete="new-password" />
+            <div class="relative">
+                <input [type]="showPassword ? 'text' : 'password'" placeholder="********" formControlName="password" autocomplete="new-password" />
+                <button type="button" (click)="togglePassword()"
+                    class="absolute right-3 top-5 -translate-y-1/2 text-sm text-gray-400 cursor-pointer">
+                    @if (showPassword) {
+                    <app-icon-eye></app-icon-eye>
+                    } @else {
+                    <app-icon-eye-lash></app-icon-eye-lash>
+                    }
+                </button>
             <small class="text-red-500 text-sm" *ngIf="passwordErrors">
                 <span *ngIf="passwordErrors['required']">Password is required</span>
                 <span *ngIf="passwordErrors['minlength']">Password must be at least 8 characters</span>
                 <span *ngIf="passwordErrors['server']">{{ passwordErrors['server'] }}</span>
             </small>
+        </div>
         </app-control>
 
         <!-- Phone -->

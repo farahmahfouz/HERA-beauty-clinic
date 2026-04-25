@@ -16,14 +16,24 @@
 
         <!-- Password -->
         <app-control label="Password">
-            <input type="password" name="password" minlength="8" required placeholder="********" ngModel password
-                #password="ngModel" autocomplete="current-password" />
-            @if (password.invalid && (password.touched || password.dirty)) {
-            <small class="text-red-500 text-sm">
-                <span *ngIf="password.errors?.['required']">Password is required</span>
-                <span *ngIf="password.errors?.['minlength']">Password must be at least 8 characters</span>
-            </small>
-            }
+            <div class="relative">
+                <input [type]="showPassword ? 'text' : 'password'" name="password" minlength="8" required placeholder="********" ngModel password
+                    #password="ngModel" autocomplete="current-password" />
+                <button type="button" (click)="togglePassword()"
+                    class="absolute right-3 top-5 -translate-y-1/2 text-sm text-gray-400 cursor-pointer">
+                    @if (showPassword) {
+                    <app-icon-eye></app-icon-eye>
+                    } @else {
+                    <app-icon-eye-lash></app-icon-eye-lash>
+                    }
+                </button>
+                @if (password.invalid && (password.touched || password.dirty)) {
+                <small class="text-red-500 text-sm">
+                    <span *ngIf="password.errors?.['required']">Password is required</span>
+                    <span *ngIf="password.errors?.['minlength']">Password must be at least 8 characters</span>
+                </small>
+                }
+            </div>
         </app-control>
 
         <small class="text-red-500 text-sm py-3" *ngIf="serverError">{{ serverError }}</small>
