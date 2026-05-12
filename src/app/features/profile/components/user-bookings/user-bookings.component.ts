@@ -40,6 +40,7 @@ export interface Booking {
 })
 export class UserBookingsComponent implements OnInit {
   bookings: any[] = [];
+  isLoading = true;
   constructor(private bookingService: BookingService, private destroyRef: DestroyRef) { }
 
   ngOnInit() {
@@ -50,9 +51,11 @@ export class UserBookingsComponent implements OnInit {
     const subscription = this.bookingService.getMyBookings().subscribe({
       next: (res) => {
         this.bookings = res;
+        this.isLoading = false;
       },
       error: (err) => {
         console.error('Error fetching bookings:', err);
+        this.isLoading = false;
       }
     });
 

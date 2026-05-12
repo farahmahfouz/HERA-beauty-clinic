@@ -70,11 +70,9 @@ export class BookingComponent implements OnInit {
     this.modal.close();
   }
 
-  // أضف هذه الـ properties
   availableDatesForSchedule: { date: string; dayName: string; dayData: any }[] = [];
   weekOffset = 0;
 
-  // استبدل onDoctorChange بـ:
   onDoctorChange(event: Event) {
     const id = (event.target as HTMLSelectElement).value;
     this.selectedSchedule = this.scheduales.find(s => s._id === id);
@@ -190,6 +188,7 @@ export class BookingComponent implements OnInit {
       dateOfService: this.selectedDate,
 
       timeSlot: {
+        slotId: this.selectedSlot._id,
         start: this.selectedSlot.start,
         end: this.selectedSlot.end
       }

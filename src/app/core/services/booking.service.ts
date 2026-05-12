@@ -1,26 +1,31 @@
 import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
-import { map } from 'rxjs';
+import { Injectable, inject } from '@angular/core';
+import { map, shareReplay, tap } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
 })
 export class BookingService {
-  constructor(private httpClient: HttpClient) { }
+  private httpClient = inject(HttpClient);
+
+  private bookings$ = this.httpClient.get<any>('booking/my-bookings').pipe(
+    map(res => res.data.bookings),
+    shareReplay(1)
+  );
 
   createBooking(data: any) {
     return this.httpClient.post<any>('booking', data).pipe(
-      map(res => {
-        return res.data.booking;
+      map(res => res.data.booking),
+      tap(() => {
+        this.bookings$ = this.httpClient.get<any>('booking/my-bookings').pipe(
+          map(res => res.data.bookings),
+          shareReplay(1)
+        );
       })
-    )
+    );
   }
 
   getMyBookings() {
-    return this.httpClient.get<any>('booking/my-bookings').pipe(
-      map(res => {
-        return res.data.bookings;
-      })
-    )
+    return this.bookings$;
   }
 }
